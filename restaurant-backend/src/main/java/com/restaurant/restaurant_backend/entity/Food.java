@@ -3,6 +3,8 @@ package com.restaurant.restaurant_backend.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +13,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+@JsonPropertyOrder({
+    "category",
+    "id",
+    "name",
+    "description",
+    "price",
+    "imageUrl",
+    "isAvailable",
+    "isSpecial",
+    "rating",
+    "createdAt"
+})
 @Entity
 @Table(name = "foods")
 public class Food {
