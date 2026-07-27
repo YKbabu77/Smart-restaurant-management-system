@@ -1,0 +1,189 @@
+/* Hero Section */
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 70px 80px;
+    background-color: #fff8f2;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    max-width: 550px;
+}
+
+.hero-content h1 {
+    font-size: 55px;
+    color: #ff6b35;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 20px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.hero-btn {
+    margin-top: 30px;
+    padding: 15px 35px;
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background-color: #e85a27;
+}
+
+.hero-image img {
+    width: 500px;
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+/* Common Section */
+
+.section {
+    padding: 70px 80px;
+    text-align: center;
+}
+
+.section h2 {
+    color: #ff6b35;
+    font-size: 38px;
+    margin-bottom: 40px;
+}
+
+/* Featured Foods */
+
+.food-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.food-card {
+    width: 220px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.food-card:hover {
+    transform: translateY(-8px);
+}
+
+.food-card h3 {
+    color: #333;
+}
+
+.food-card p {
+    color: #ff6b35;
+    font-weight: bold;
+}
+
+/* Categories */
+
+.categories {
+    background: #f9f9f9;
+}
+
+.category-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.category {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Why Choose Us */
+
+.why p {
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+/* Reviews */
+
+.reviews {
+    background-color: #fff8f2;
+}
+
+.review-card {
+    background: white;
+    width: 450px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+/* Call To Action */
+
+.cta {
+    background-color: #ff6b35;
+    color: white;
+}
+
+.cta h2 {
+    color: white;
+}
+
+.cta button {
+    margin-top: 25px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: #ff6b35;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cta button:hover {
+    background: #f3f3f3;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.hero{
+    flex-direction: column;
+    text-align:center;
+}
+
+.hero-image{
+    margin-top:40px;
+}
+
+.hero-content h1{
+    font-size:40px;
+}
+
+.section{
+    padding:50px 20px;
+}
+
+.review-card{
+    width:90%;
+}
+
+}
