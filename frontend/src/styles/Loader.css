@@ -1,0 +1,69 @@
+.loader-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:300px;
+}
+
+.loader{
+
+    width:70px;
+    height:70px;
+
+    border:8px solid #f3f3f3;
+    border-top:8px solid var(--primary);
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+.loader-container p{
+
+    margin-top:20px;
+    color:#555;
+    font-size:18px;
+    font-weight:500;
+
+}
+.loader-icon{
+
+font-size:70px;
+
+animation:bounce 1s infinite;
+
+}
+
+@keyframes bounce{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+}
+
+@keyframes spin{
+
+0%{
+
+transform:rotate(0deg);
+
+}
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}

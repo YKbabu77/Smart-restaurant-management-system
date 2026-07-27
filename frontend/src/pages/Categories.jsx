@@ -6,7 +6,7 @@ import burger from "../assets/burger-category.jpg";
 import chicken from "../assets/chicken-category.jpg";
 import drinks from "../assets/drinks-category.jpg";
 import dessert from "../assets/dessert-category.jpg";
-
+import { Helmet } from "react-helmet-async";
 const categories = [
     {
         id: 1,
@@ -43,6 +43,9 @@ const categories = [
 function Categories() {
     return (
         <div className="categories-page">
+            <Helmet>
+    <title>Food Paradise | Categories</title>
+</Helmet>
 
             <h1 className="categories-title">
                 Food Categories

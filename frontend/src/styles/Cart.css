@@ -107,3 +107,25 @@
 .checkout-btn{
     background:#ff6b35;
 }
+@media(max-width:768px){
+
+.cart-page{
+
+padding:40px 20px;
+
+}
+
+.cart-item{
+
+flex-direction:column;
+text-align:center;
+
+}
+
+.cart-buttons{
+
+flex-direction:column;
+
+}
+
+}

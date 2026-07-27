@@ -44,6 +44,7 @@
 
 .social-icons a:hover{
     background:#ff6b35;
+    transform:translateY(-6px) rotate(360deg);
 }
 
 .footer h3{

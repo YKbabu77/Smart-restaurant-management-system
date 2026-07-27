@@ -5,6 +5,7 @@ import pizza from "../assets/pizza.jpg";
 import burger from "../assets/burger.jpg";
 import chicken from "../assets/chicken.jpg";
 import drink from "../assets/coco_cola.jpg";
+import { Helmet } from "react-helmet-async";
 
 const foods=[
 {
@@ -36,8 +37,16 @@ image:drink
 function Menu(){
 
 return(
+  
 
 <div className="menu-page">
+  <Helmet>
+                <title>Food Paradise | Menu</title>
+                <meta
+                    name="description"
+                    content="Explore our delicious menu."
+                />
+            </Helmet>
 
 <h1 className="menu-title">
 Our Menu

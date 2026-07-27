@@ -122,3 +122,21 @@
 .feature-card p{
     color:#666;
 }
+@media(max-width:768px){
+
+.about-hero,
+.chef-section{
+
+padding:40px 20px;
+text-align:center;
+
+}
+
+.stats,
+.why-us{
+
+padding:40px 20px;
+
+}
+
+}

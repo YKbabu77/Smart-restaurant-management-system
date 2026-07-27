@@ -74,3 +74,20 @@
 .order-btn:hover{
     background:#e85a27;
 }
+@media(max-width:768px){
+
+.orders-page{
+
+padding:40px 20px;
+
+}
+
+.order-header{
+
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+
+}
+
+}

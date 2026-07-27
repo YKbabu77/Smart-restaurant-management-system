@@ -1,10 +1,18 @@
 import biryani from "../assets/biryani.jpg";
 import "../styles/Home.css";
+import { showSuccess } from "../utils/toast";
+import { Helmet } from "react-helmet-async";
 
 function Home() {
   return (
     <div>
-
+      <Helmet>
+                <title>Food Paradise | Home</title>
+                <meta
+                    name="description"
+                    content="Welcome to Food Paradise Restaurant."
+                />
+      </Helmet>
       {/* Hero Section */}
 
       <section className="hero">
@@ -20,8 +28,8 @@ function Home() {
             fresh ingredients and delivered straight to your doorstep.
           </p>
 
-          <button className="hero-btn">
-            Order Now
+          <button className="hero-btn"   onClick={() => showSuccess("Welcome to Food Paradise!")}>
+             Order Now
           </button>
 
         </div>

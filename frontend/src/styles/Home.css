@@ -1,4 +1,4 @@
-/* Hero Section */
+/* Hero Section
 
 .hero {
     display: flex;
@@ -45,8 +45,79 @@
     width: 500px;
     max-width: 100%;
     border-radius: 20px;
+} */
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+    padding:80px;
+    min-height:80vh;
+    flex-wrap:wrap;
 }
 
+.hero-content{
+    flex:1;
+    min-width:350px;
+}
+
+.hero-content h1{
+    font-size:64px;
+    color:var(--primary);
+    line-height:1.2;
+    margin-bottom:25px;
+}
+
+.hero-content p{
+    font-size:20px;
+    color:#666;
+    line-height:1.8;
+    margin-bottom:35px;
+    max-width:550px;
+}
+.hero-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:15px 35px;
+    background:var(--primary);
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .3s ease;
+    box-shadow:0 8px 20px rgba(255,107,53,.3);
+}
+
+
+.hero-btn:hover{
+    background:var(--primary-dark);
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(255,107,53,.4);
+}
+.hero-btn{
+    transition:.3s;
+}
+
+.hero-btn:hover{
+    transform:scale(1.08);
+}
+.hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    min-width:350px;
+}
+
+.hero-image img{
+    width:100%;
+    max-width:550px;
+    height:500px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
 /* Common Section */
 
 .section {
@@ -184,6 +255,98 @@
 
 .review-card{
     width:90%;
+}
+
+}
+/* @media(max-width:768px){
+
+.hero{
+
+padding:40px 20px;
+text-align:center;
+
+}
+
+.hero-content{
+
+order:2;
+
+}
+
+.hero-image{
+
+order:1;
+
+}
+
+.hero-content h1{
+
+font-size:34px;
+
+}
+
+.hero-content p{
+
+font-size:16px;
+
+}
+
+} */
+ .hero-image img{
+
+animation:floatImage 4s ease-in-out infinite;
+
+}
+
+@keyframes floatImage{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+ @media(max-width:768px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.hero-content{
+    order:2;
+}
+
+.hero-image{
+    order:1;
+}
+
+.hero-content h1{
+    font-size:42px;
+}
+
+.hero-content p{
+    font-size:18px;
+    max-width:100%;
+}
+
+.hero-image img{
+    max-width:100%;
+    height:320px;
 }
 
 }

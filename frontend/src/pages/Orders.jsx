@@ -1,5 +1,6 @@
 //This is the orders page
 import "../styles/Orders.css";
+import { Helmet } from "react-helmet-async";
 
 const orders = [
     {
@@ -39,6 +40,9 @@ function Orders() {
     return (
 
         <div className="orders-page">
+            <Helmet>
+    <title>Food Paradise | My Orders</title>
+</Helmet>
 
             <h1 className="orders-title">
                 My Orders

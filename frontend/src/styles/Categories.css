@@ -70,3 +70,35 @@
 .category-btn:hover {
     background: #e85a27;
 }
+.category-card{
+
+overflow:hidden;
+
+}
+
+.category-card img{
+
+transition:.5s;
+
+}
+
+.category-card:hover img{
+
+transform:scale(1.08);
+
+}
+@media(max-width:768px){
+
+.categories-page{
+
+padding:40px 20px;
+
+}
+
+.category-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}

@@ -1,78 +1,70 @@
 import "../styles/Navbar.css";
+import { Link, NavLink } from "react-router-dom";
+import { FaShoppingCart, FaUtensils, FaBars, FaTimes } from "react-icons/fa";
+import { useState } from "react";
 
-import { NavLink, Link } from "react-router-dom";
+function Navbar() {
 
-import { FaShoppingCart } from "react-icons/fa";
-import { FaUtensils } from "react-icons/fa";
+    const [menuOpen, setMenuOpen] = useState(false);
 
-function Navbar(){
+    return (
 
-return(
+        <nav className="navbar">
 
-<nav className="navbar">
+            <Link to="/" className="logo">
 
-<Link
-to="/"
-className="logo"
->
+                <FaUtensils />
 
-<FaUtensils/>
+                <span> Food Paradise</span>
 
-<span>
+            </Link>
 
- Food Paradise
+            <div className={menuOpen ? "nav-links active" : "nav-links"}>
 
-</span>
+                <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
 
-</Link>
+                <NavLink to="/menu" onClick={() => setMenuOpen(false)}>Menu</NavLink>
 
-<div className="nav-links">
+                <NavLink to="/categories" onClick={() => setMenuOpen(false)}>Categories</NavLink>
 
-<NavLink to="/">Home</NavLink>
+                <NavLink to="/orders" onClick={() => setMenuOpen(false)}>Orders</NavLink>
 
-<NavLink to="/menu">Menu</NavLink>
+                <NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink>
 
-<NavLink to="/categories">Categories</NavLink>
+                <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
 
-<NavLink to="/orders">Orders</NavLink>
+                <NavLink
+                    to="/cart"
+                    className="cart-icon"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    <FaShoppingCart />
+                </NavLink>
 
-<NavLink to="/about">About</NavLink>
+                <NavLink
+                    to="/login"
+                    className="login-btn"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Login
+                </NavLink>
 
-<NavLink to="/contact">Contact</NavLink>
+            </div>
 
-</div>
+            <div
+                className="menu-toggle"
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
 
-<div className="nav-icons">
+                {
+                    menuOpen ? <FaTimes /> : <FaBars />
+                }
 
-<NavLink
-to="/cart"
-className="cart-icon"
->
+            </div>
 
-<FaShoppingCart/>
+        </nav>
 
-</NavLink>
-
-<NavLink
-to="/login"
-className="login-btn"
->
-
-Login
-
-</NavLink>
-
-</div>
-
-<div className="menu-toggle">
-
-☰
-
-</div>
-
-</nav>
-
-);
+    );
 
 }
 

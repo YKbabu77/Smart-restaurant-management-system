@@ -1,3 +1,6 @@
+html{
+    scroll-behavior:smooth;
+}
 /* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -55,7 +58,21 @@ img{
 button{
     font-family:inherit;
     cursor:pointer;
-    transition:.3s;
+    transition:all .3s ease;
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 10px 20px rgba(0,0,0,.15);
+
+}
+
+button:active{
+
+transform:scale(.96);
+
 }
 
 /* Inputs */
@@ -98,14 +115,20 @@ select{
 /* Common Card */
 
 .card{
-    background:white;
-    border-radius:12px;
-    box-shadow:var(--shadow);
-    transition:.3s;
+
+background:white;
+border-radius:12px;
+box-shadow:var(--shadow);
+transition:all .4s ease;
+
 }
 
 .card:hover{
-    transform:translateY(-8px);
+
+transform:translateY(-10px);
+
+box-shadow:0 18px 35px rgba(0,0,0,.18);
+
 }
 
 /* Common Button */
@@ -132,4 +155,29 @@ select{
 
 .btn-secondary:hover{
     background:#333;
+}
+.fade-up{
+
+animation:fadeUp .8s ease forwards;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
 }

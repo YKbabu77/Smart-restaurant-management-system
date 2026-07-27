@@ -1,12 +1,16 @@
 //this is the login page 
 import "../styles/Login.css";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function Login() {
 
     return (
 
         <div className="login-page">
+          <Helmet>
+                <title>Food Paradise | Login</title>
+            </Helmet>
 
             <div className="login-container">
 

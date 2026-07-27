@@ -1,11 +1,15 @@
 //This is the contact page
 import "../styles/Contact.css";
+import { Helmet } from "react-helmet-async";
 
 function Contact() {
 
     return (
 
         <div className="contact-page">
+            <Helmet>
+    <title>Food Paradise | Contact Us</title>
+</Helmet>
 
             <h1 className="contact-title">
                 Contact Us

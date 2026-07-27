@@ -1,12 +1,16 @@
 //This is the register page
 import "../styles/Register.css";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function Register() {
 
     return (
 
         <div className="register-page">
+          <Helmet>
+    <title>Food Paradise | Register</title>
+</Helmet>
 
             <div className="register-container">
 

@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 30px;
 }
 
 .register-container {
@@ -76,4 +76,21 @@
     color: #ff6b35;
     text-decoration: none;
     font-weight: bold;
+}
+@media(max-width:768px){
+
+.login-page,
+.register-page{
+
+padding:20px;
+
+}
+
+.login-container,
+.register-container{
+
+padding:25px;
+
+}
+
 }

@@ -3,12 +3,15 @@ import "../styles/About.css";
 
 import restaurant from "../assets/restaurant.jpg";
 import chef from "../assets/chef.jpg";
-
+import { Helmet } from "react-helmet-async";
 function About(){
 
 return(
 
 <div className="about-page">
+    <Helmet>
+    <title>Food Paradise | About Us</title>
+</Helmet>
 
 <section className="about-hero">
 

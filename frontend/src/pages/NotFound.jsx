@@ -1,12 +1,16 @@
 //This is the notfound page
 import "../styles/NotFound.css";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function NotFound() {
 
     return (
 
-        <div className="notfound-page">
+        <div className="notfound-page">\
+        <Helmet>
+    <title>404 | Page Not Found</title>
+</Helmet>
 
             <div className="notfound-container">
 

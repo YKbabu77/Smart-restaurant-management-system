@@ -3,6 +3,7 @@ import "../styles/Cart.css";
 
 import pizza from "../assets/pizza.jpg";
 import burger from "../assets/burger.jpg";
+import { Helmet } from "react-helmet-async";
 
 const cartItems = [
     {
@@ -32,6 +33,9 @@ function Cart() {
 
     return (
         <div className="cart-page">
+          <Helmet>
+    <title>Food Paradise | Cart</title>
+</Helmet>
 
             <h1 className="cart-title">
                 Shopping Cart
