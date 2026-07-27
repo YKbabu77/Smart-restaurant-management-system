@@ -1,41 +1,58 @@
 //this is the menu page 
 import "../styles/Menu.css";
-
-import pizza from "../assets/pizza.jpg";
-import burger from "../assets/burger.jpg";
-import chicken from "../assets/chicken.jpg";
-import drink from "../assets/coco_cola.jpg";
 import { Helmet } from "react-helmet-async";
-
-const foods=[
-{
-id:1,
-name:"Margherita Pizza",
-price:299,
-image:pizza
-},
-{
-id:2,
-name:"Chicken Burger",
-price:199,
-image:burger
-},
-{
-id:3,
-name:"Grilled Chicken",
-price:349,
-image:chicken
-},
-{
-id:4,
-name:"Cold Drink",
-price:49,
-image:drink
-}
-];
+import { useEffect, useState } from "react";
+import api from "../services/api";
+import Loader from "../components/Loader";
+import { showError, showSuccess } from "../utils/toast";
 
 function Menu(){
+    const [foods, setFoods] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("All");
+    useEffect(() => {
 
+      fetchFoods();
+
+    }, []);
+    const fetchFoods = async () => {
+
+    try{
+
+        const response = await api.get("/api/foods");
+
+        setFoods(response.data);
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showError("Unable to load Menu.");
+
+    }
+    finally{
+
+        setLoading(false);
+
+    }
+
+   };
+    if (loading) {
+        return <Loader />;
+    }
+const filteredFoods = foods.filter((food) => {
+
+    const matchesSearch =
+        food.name.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory =
+        selectedCategory === "All" ||
+        food.category.name === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+});
 return(
   
 
@@ -57,6 +74,8 @@ Our Menu
 <input
 className="search-box"
 placeholder="Search Food..."
+value={search}
+onChange={(e) => setSearch(e.target.value)}
 />
 
 </center>
@@ -65,11 +84,34 @@ placeholder="Search Food..."
 
 <center>
 
-<button>All</button>
-<button>Pizza</button>
-<button>Burger</button>
-<button>Chicken</button>
-<button>Drinks</button>
+<button onClick={() => setSelectedCategory("All")}>
+    All
+</button>
+
+<button
+    className={selectedCategory === "Pizza" ? "active-filter" : ""}
+    onClick={() => setSelectedCategory("Pizza")}
+>
+    Pizza
+</button>
+<button 
+    className={selectedCategory === "Burgers" ? "active-filter" : ""}
+    onClick={() => setSelectedCategory("Burgers")}
+>
+    Burgers
+</button>
+
+<button 
+    className={selectedCategory === "Chicken" ? "active-filter" : ""}
+    onClick={() => setSelectedCategory("Chicken")}>
+    Chicken
+</button>
+
+<button 
+    className={selectedCategory === "Drinks" ? "active-filter" : ""}
+    onClick={() => setSelectedCategory("Drinks")}>
+    Drinks
+</button>
 
 </center>
 
@@ -78,18 +120,21 @@ placeholder="Search Food..."
 <div className="food-grid">
 
 {
-foods.map(food=>(
+filteredFoods.map(food=>(
 
 <div
 className="food-card"
 key={food.id}
 >
 
-<img src={food.image}/>
+<img src={food.imageUrl} alt={food.name}/>
 
 <div className="food-details">
 
 <h3>{food.name}</h3>
+<p className="food-description">
+    {food.description}
+</p>
 
 <p className="food-price">
 
@@ -97,7 +142,7 @@ key={food.id}
 
 </p>
 
-<button className="food-btn">
+<button className="food-btn" onClick={() => showSuccess(`${food.name} added to cart!`)}>
 
 Add To Cart
 

@@ -19,7 +19,7 @@ import com.restaurant.restaurant_backend.service.CategoryService;
 
 @RestController
 @RequestMapping("/api/categories")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CategoryController {
 
     @Autowired

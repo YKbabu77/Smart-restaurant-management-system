@@ -74,6 +74,12 @@ transition:.5s;
 transform:scale(1.08);
 
 }
+.food-description{
+    color:#888;
+    font-size:15px;
+    margin:10px 0;
+    line-height:1.5;
+}
 
 .food-details{
     padding:20px;
@@ -83,8 +89,9 @@ transform:scale(1.08);
     margin-bottom:10px;
 }
 
+
 .food-price{
-    color:#ff6b35;
+    color:#000000;
     font-weight:bold;
     font-size:18px;
 }
@@ -102,6 +109,11 @@ transform:scale(1.08);
 
 .food-btn:hover{
     background:#e85a27;
+}
+.active-filter {
+    background-color: #ff6b35;
+    color: white;
+    border: none;
 }
 @media(max-width:768px){
 

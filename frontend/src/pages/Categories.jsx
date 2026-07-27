@@ -1,46 +1,45 @@
 //This is categories page
 import "../styles/Categories.css";
-
-import pizza from "../assets/pizza-category.jpg";
-import burger from "../assets/burger-category.jpg";
-import chicken from "../assets/chicken-category.jpg";
-import drinks from "../assets/drinks-category.jpg";
-import dessert from "../assets/dessert-category.jpg";
 import { Helmet } from "react-helmet-async";
-const categories = [
-    {
-        id: 1,
-        name: "Pizza",
-        description: "Cheesy and freshly baked pizzas.",
-        image: pizza
-    },
-    {
-        id: 2,
-        name: "Burgers",
-        description: "Juicy burgers with fresh ingredients.",
-        image: burger
-    },
-    {
-        id: 3,
-        name: "Chicken",
-        description: "Grilled and crispy chicken dishes.",
-        image: chicken
-    },
-    {
-        id: 4,
-        name: "Drinks",
-        description: "Refreshing hot and cold beverages.",
-        image: drinks
-    },
-    {
-        id: 5,
-        name: "Desserts",
-        description: "Sweet treats to end your meal.",
-        image: dessert
-    }
-];
+import { useEffect, useState } from "react";
+import api from "../services/api";
+import Loader from "../components/Loader";
+import { showError } from "../utils/toast";
 
 function Categories() {
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+
+      fetchCategories();
+
+    }, []);
+    const fetchCategories = async () => {
+
+    try{
+
+        const response = await api.get("/api/categories");
+
+        setCategories(response.data);
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showError("Unable to load categories.");
+
+    }
+    finally{
+
+        setLoading(false);
+
+    }
+
+   };
+    if (loading) {
+        return <Loader />;
+    }
     return (
         <div className="categories-page">
             <Helmet>
@@ -62,7 +61,7 @@ function Categories() {
                     <div className="category-card" key={category.id}>
 
                         <img
-                            src={category.image}
+                            src={category.imageUrl}
                             alt={category.name}
                         />
 
