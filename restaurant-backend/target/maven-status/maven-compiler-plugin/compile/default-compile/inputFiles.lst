@@ -12,3 +12,9 @@ D:\projects\restaurant-website\restaurant-backend\src\main\java\entity\PaymentMe
 D:\projects\restaurant-website\restaurant-backend\src\main\java\entity\PaymentStatus.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\entity\Role.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\entity\User.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\repository\CartRepository.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\repository\CategoryRepository.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\repository\FoodRepository.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\repository\OrderItemRepository.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\repository\OrderRepository.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\repository\UserRepository.java
