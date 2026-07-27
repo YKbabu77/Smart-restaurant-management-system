@@ -7,7 +7,7 @@ const orders = [
         id: 1001,
         date: "25 July 2026",
         status: "Delivered",
-        total: 34,
+        total: 797,
         items: [
             "Margherita Pizza x2",
             "Chicken Burger x1"
@@ -17,7 +17,7 @@ const orders = [
         id: 1002,
         date: "20 July 2026",
         status: "Preparing",
-        total: 28,
+        total: 447,
         items: [
             "Grilled Chicken x1",
             "Cold Drink x2"
@@ -27,7 +27,7 @@ const orders = [
         id: 1003,
         date: "15 July 2026",
         status: "Cancelled",
-        total: 18,
+        total: 198,
         items: [
             "Veg Pizza x1",
             "Soft Drink x1"
@@ -95,7 +95,7 @@ function Orders() {
 
                         <p className="order-total">
 
-                            Total : ${order.total}
+                            Total : ₹{order.total}
 
                         </p>
 

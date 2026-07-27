@@ -9,14 +9,14 @@ const cartItems = [
     {
         id: 1,
         name: "Margherita Pizza",
-        price: 12,
+        price: 299,
         quantity: 2,
         image: pizza
     },
     {
         id: 2,
         name: "Chicken Burger",
-        price: 10,
+        price: 199,
         quantity: 1,
         image: burger
     }
@@ -57,7 +57,7 @@ function Cart() {
                             <h3>{item.name}</h3>
 
                             <p className="cart-price">
-                                ${item.price}
+                                ₹{item.price}
                             </p>
 
                         </div>
@@ -91,7 +91,7 @@ function Cart() {
                     </p>
 
                     <p>
-                        <strong>Total Price:</strong> ${totalPrice}
+                        <strong>Total Price:</strong> ₹{totalPrice}
                     </p>
 
                     <div className="cart-buttons">

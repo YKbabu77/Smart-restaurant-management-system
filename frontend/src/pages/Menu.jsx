@@ -11,25 +11,25 @@ const foods=[
 {
 id:1,
 name:"Margherita Pizza",
-price:12,
+price:299,
 image:pizza
 },
 {
 id:2,
 name:"Chicken Burger",
-price:8,
+price:199,
 image:burger
 },
 {
 id:3,
 name:"Grilled Chicken",
-price:15,
+price:349,
 image:chicken
 },
 {
 id:4,
 name:"Cold Drink",
-price:3,
+price:49,
 image:drink
 }
 ];
@@ -93,7 +93,7 @@ key={food.id}
 
 <p className="food-price">
 
-${food.price}
+₹{food.price}
 
 </p>
 

@@ -50,17 +50,17 @@ function Home() {
 
           <div className="food-card">
             <h3>🍕 Margherita Pizza</h3>
-            <p>$12</p>
+            <p>₹299</p>
           </div>
 
           <div className="food-card">
             <h3>🍔 Chicken Burger</h3>
-            <p>$9</p>
+            <p>₹199</p>
           </div>
 
           <div className="food-card">
             <h3>🥗 Fresh Salad</h3>
-            <p>$10</p>
+            <p>₹119</p>
           </div>
 
         </div>
