@@ -1,5 +1,0 @@
-# Created at 2026-06-25T16:36:24.068
-Boot Manifest-JAR contains absolute paths in classpath 'D:\projects\restaurant-website\restaurant-backend\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-
