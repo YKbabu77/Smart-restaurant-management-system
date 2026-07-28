@@ -1,12 +1,41 @@
 import "../styles/Navbar.css";
-import { Link, NavLink } from "react-router-dom";
-import { FaShoppingCart, FaUtensils, FaBars, FaTimes } from "react-icons/fa";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+    FaShoppingCart,
+    FaUtensils,
+    FaBars,
+    FaTimes,
+    FaUserCircle
+} from "react-icons/fa";
 import { useState } from "react";
+
 
 function Navbar() {
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [profileOpen, setProfileOpen] = useState(false);  
+    const navigate = useNavigate();
 
+    const user = JSON.parse(localStorage.getItem("user"));
+    const initials = user
+    ? user.fullName
+          .split(" ")
+          .map(name => name[0])
+          .join("")
+          .substring(0, 2)
+          .toUpperCase()
+    : "";
+    const handleLogout = () => {
+
+    localStorage.removeItem("user");
+
+    setProfileOpen(false);
+
+    setMenuOpen(false);
+
+    navigate("/login");
+
+    };
     return (
 
         <nav className="navbar">
@@ -41,13 +70,99 @@ function Navbar() {
                     <FaShoppingCart />
                 </NavLink>
 
-                <NavLink
-                    to="/login"
-                    className="login-btn"
-                    onClick={() => setMenuOpen(false)}
+               {
+                user ? (
+
+        <div
+    className="user-avatar"
+    onClick={() => setProfileOpen(!profileOpen)}
+>
+
+    <div className="avatar-circle">
+
+        {initials}
+
+    </div>
+
+    {
+        profileOpen && (
+
+            <div className="profile-dropdown">
+
+                <div className="profile-header">
+
+                    <div className="profile-avatar">
+
+                        {initials}
+
+                    </div>
+
+                    <div>
+
+                        <h4>{user.fullName}</h4>
+
+                        <p>{user.email}</p>
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <button
+                    className="dropdown-btn"
+                    onClick={() => {
+
+                        setProfileOpen(false);
+
+                        navigate("/orders");
+
+                    }}
                 >
-                    Login
-                </NavLink>
+
+                    📦 My Orders
+
+                </button>
+
+                <button
+                    className="dropdown-btn logout"
+                    onClick={handleLogout}
+                >
+
+                    🚪 Logout
+
+                </button>
+
+            </div>
+
+        )
+    }
+
+    </div>
+
+        ) : (
+
+        <>
+            <NavLink
+                to="/login"
+                className="login-btn"
+                onClick={() => setMenuOpen(false)}
+            >
+                Login
+            </NavLink>
+
+            <NavLink
+                to="/register"
+                className="login-btn"
+                onClick={() => setMenuOpen(false)}
+            >
+                Register
+            </NavLink>
+
+        </>
+
+    )
+    }
 
             </div>
 
