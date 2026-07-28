@@ -203,14 +203,14 @@ function Orders() {
                 <div key={item.id} className="modal-item">
 
                     <img
-                        src={item.food.imageUrl}
-                        alt={item.food.name}
+                        src={item.foodImageUrl}
+                        alt={item.foodName}
                         width="80"
                     />
 
                     <div>
 
-                        <h3>{item.food.name}</h3>
+                        <h3>{item.foodName}</h3>
 
                         <p>Price : ₹{item.price}</p>
 
@@ -241,5 +241,4 @@ function Orders() {
     );
 
 }
-
 export default Orders;
