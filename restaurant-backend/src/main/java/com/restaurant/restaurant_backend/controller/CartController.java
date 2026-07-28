@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.CartDTO;
 import com.restaurant.restaurant_backend.dto.CartRequest;
 import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.service.CartService;
@@ -34,13 +35,13 @@ public class CartController {
 
     // Get all cart items
     @GetMapping
-    public ResponseEntity<List<Cart>> getAllCartItems() {
+    public ResponseEntity<List<CartDTO>> getAllCartItems() {
         return ResponseEntity.ok(cartService.getAllCartItems());
     }
 
     // Get cart item by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Cart> getCartItemById(@PathVariable Long id) {
+    public ResponseEntity<CartDTO> getCartItemById(@PathVariable Long id) {
 
         return cartService.getCartItemById(id)
                 .map(ResponseEntity::ok)
@@ -49,7 +50,7 @@ public class CartController {
 
     // Get cart items by user
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Cart>> getCartItemsByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<CartDTO>> getCartItemsByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(cartService.getCartItemsByUser(userId));
     }
 

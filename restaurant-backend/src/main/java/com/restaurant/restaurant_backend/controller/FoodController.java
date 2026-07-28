@@ -49,13 +49,13 @@ public class FoodController {
 
     // Get Foods By Category
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Food>> getFoodsByCategory(@PathVariable Long categoryId) {
+    public ResponseEntity<List<FoodDTO>> getFoodsByCategory(@PathVariable Long categoryId) {
         return ResponseEntity.ok(foodService.getFoodsByCategory(categoryId));
     }
 
     // Get Available Foods
     @GetMapping("/available")
-    public ResponseEntity<List<Food>> getAvailableFoods() {
+    public ResponseEntity<List<FoodDTO>> getAvailableFoods() {
         return ResponseEntity.ok(foodService.getAvailableFoods());
     }
 

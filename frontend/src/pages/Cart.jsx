@@ -174,13 +174,13 @@ function Cart() {
                     <div className="cart-item" key={item.id}>
 
                         <img
-                            src={item.food.imageUrl}
-                            alt={item.food.name}
+                            src={item.foodImageUrl}
+                            alt={item.foodName}
                         />
 
                         <div className="cart-info">
 
-                            <h3>{item.food.name}</h3>
+                            <h3>{item.foodName}</h3>
 
                             <p className="cart-price">
                                 ₹{item.price}
@@ -204,7 +204,7 @@ function Cart() {
 
                         <button 
                             className="remove-btn"
-                            onClick={() => showSuccess(`${food.name} removed from cart!`)}
+                            onClick={() => showSuccess(`${foodName} removed from cart!`)}
                             onClick={() => removeCartItem(item.id)}>
                             Remove
                         </button>

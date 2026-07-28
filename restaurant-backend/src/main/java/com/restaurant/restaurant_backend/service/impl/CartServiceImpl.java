@@ -6,10 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restaurant.restaurant_backend.dto.CartDTO;
 import com.restaurant.restaurant_backend.dto.CartRequest;
 import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.entity.Food;
 import com.restaurant.restaurant_backend.entity.User;
+import com.restaurant.restaurant_backend.mapper.CartMapper;
 import com.restaurant.restaurant_backend.repository.CartRepository;
 import com.restaurant.restaurant_backend.repository.FoodRepository;
 import com.restaurant.restaurant_backend.repository.UserRepository;
@@ -44,18 +46,24 @@ public class CartServiceImpl implements CartService {
 }
 
     @Override
-    public List<Cart> getAllCartItems() {
-        return cartRepository.findAll();
+    public List<CartDTO> getAllCartItems() {
+        return cartRepository.findAll().stream()
+            .map(CartMapper::toDTO)
+            .toList();
     }
 
     @Override
-    public Optional<Cart> getCartItemById(Long id) {
-        return cartRepository.findById(id);
+    public Optional<CartDTO> getCartItemById(Long id) {
+          return cartRepository.findById(id)
+            .map(CartMapper::toDTO);
     }
 
     @Override
-    public List<Cart> getCartItemsByUser(Long userId) {
-        return cartRepository.findByUserId(userId);
+    public List<CartDTO> getCartItemsByUser(Long userId) {
+        return cartRepository.findByUserId(userId) 
+            .stream()
+            .map(CartMapper::toDTO)
+            .toList();
     }
 
    @Override
