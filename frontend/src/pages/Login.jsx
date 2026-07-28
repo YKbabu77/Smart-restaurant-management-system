@@ -20,6 +20,58 @@ function Login() {
         [e.target.name]: e.target.value
     });
     };
+    const handleTryDemo = () => {
+
+    setLoginData({
+
+        email: "demo@foodparadise.com",
+
+        password: "Demo@123"
+
+    });
+
+    setMessage("");
+
+    };
+    const handleDemoLogin = async () => {
+
+    try {
+
+        const demoCredentials = {
+
+            email: "demo@foodparadise.com",
+
+            password: "Demo@123"
+
+        };
+
+        const response = await axios.post(
+
+            "http://localhost:8080/api/auth/login",
+
+            demoCredentials
+
+        );
+
+        localStorage.setItem(
+
+            "user",
+
+            JSON.stringify(response.data)
+
+        );
+
+        navigate("/");
+
+    } catch (error) {
+
+        console.error(error);
+
+        setMessage("Demo login failed.");
+
+    }
+
+    };
     const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -156,6 +208,47 @@ function Login() {
                     </Link>
 
                 </div>
+                <div className="demo-card">
+
+    <h3>🚀 Recruiter Demo</h3>
+
+    <p className="demo-text">
+        Use the demo account to explore the application instantly.
+    </p>
+
+    <div className="demo-info">
+
+        <p>
+            <strong>Email:</strong> demo@foodparadise.com
+        </p>
+
+        <p>
+            <strong>Password:</strong> Demo@123
+        </p>
+
+    </div>
+
+    <div className="demo-buttons">
+
+            <button
+            type="button"
+            className="demo-btn"
+            onClick={handleTryDemo}
+            >
+            Try Demo
+                </button>
+
+                <button
+                type="button"
+                className="demo-login-btn"
+                onClick={handleDemoLogin}
+                >
+                    One Click Demo Login
+                    </button>
+
+                </div>
+
+            </div>
 
             </div>
 
