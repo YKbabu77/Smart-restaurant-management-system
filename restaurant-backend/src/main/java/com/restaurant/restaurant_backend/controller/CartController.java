@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.CartRequest;
 import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.service.CartService;
 
@@ -27,8 +28,8 @@ public class CartController {
 
     // Add item to cart
     @PostMapping
-    public ResponseEntity<Cart> addToCart(@RequestBody Cart cart) {
-        return ResponseEntity.ok(cartService.saveCart(cart));
+    public ResponseEntity<Cart> addToCart(@RequestBody CartRequest request) {
+        return ResponseEntity.ok(cartService.addToCart(request));
     }
 
     // Get all cart items

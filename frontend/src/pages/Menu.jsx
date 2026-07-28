@@ -6,6 +6,7 @@ import api from "../services/api";
 import Loader from "../components/Loader";
 import { showError, showSuccess } from "../utils/toast";
 
+
 function Menu(){
     const [foods, setFoods] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -42,7 +43,7 @@ function Menu(){
     if (loading) {
         return <Loader />;
     }
-const filteredFoods = foods.filter((food) => {
+    const filteredFoods = foods.filter((food) => {
 
     const matchesSearch =
         food.name.toLowerCase().includes(search.toLowerCase());
@@ -53,6 +54,25 @@ const filteredFoods = foods.filter((food) => {
 
     return matchesSearch && matchesCategory;
 });
+    const addToCart = async (food) => {
+    try {
+
+        const cartRequest = {
+            userId: 1,          // Temporary until JWT login
+            foodId: food.id,
+            quantity: 1
+        };
+
+        await api.post("/api/cart", cartRequest);
+
+        showSuccess(`${food.name} added to cart`);
+
+    } catch (error) {
+
+        console.error(error);
+        showError("Unable to add item to cart.");
+    }
+};
 return(
   
 
@@ -142,7 +162,10 @@ key={food.id}
 
 </p>
 
-<button className="food-btn" onClick={() => showSuccess(`${food.name} added to cart!`)}>
+<button 
+    className="food-btn" 
+    onClick={() => showSuccess(`${food.name} added to cart!`)}
+    onClick={() => addToCart(food)}>
 
 Add To Cart
 

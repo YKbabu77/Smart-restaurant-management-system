@@ -9,7 +9,6 @@ com\restaurant\restaurant_backend\RestaurantBackendApplication.class
 com\restaurant\restaurant_backend\repository\FoodRepository.class
 com\restaurant\restaurant_backend\repository\OrderRepository.class
 com\restaurant\restaurant_backend\entity\PaymentMethod.class
-com\restaurant\restaurant_backend\service\CartService.class
 com\restaurant\restaurant_backend\controller\UserController.class
 com\restaurant\restaurant_backend\service\FoodService.class
 com\restaurant\restaurant_backend\service\OrderService.class
@@ -24,7 +23,6 @@ com\restaurant\restaurant_backend\entity\OrderItem.class
 com\restaurant\restaurant_backend\entity\PaymentStatus.class
 com\restaurant\restaurant_backend\entity\Cart.class
 com\restaurant\restaurant_backend\controller\HomeController.class
-com\restaurant\restaurant_backend\service\impl\CartServiceImpl.class
 com\restaurant\restaurant_backend\service\OrderItemService.class
 com\restaurant\restaurant_backend\entity\Order.class
 com\restaurant\restaurant_backend\service\impl\UserServiceImpl.class
