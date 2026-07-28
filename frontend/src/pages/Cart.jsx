@@ -16,13 +16,26 @@ function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+
+        navigate("/login");
+
+        return;
+
+    }
+
     fetchCart();
-            }, []);
+
+    }, []);
 
     const fetchCart = async () => {
     try {
         // Temporary: userId = 1
-        const response = await api.get("/api/cart/user/1");
+        const user = JSON.parse(localStorage.getItem("user"));
+        const response = await api.get(`/api/cart/user/${user.id}`);
         setCartItems(response.data);
     } catch (error) {
         console.error(error);
@@ -102,11 +115,17 @@ function Cart() {
 
     try {
 
+        const user = JSON.parse(localStorage.getItem("user"));
+
         const orderRequest = {
-            userId: 1, // Temporary until JWT Authentication
-            deliveryAddress: "Ravulapalem, Andhra Pradesh",
-            paymentMethod: "CASH"
-        };
+
+        userId: user.id,
+
+        deliveryAddress: "Ravulapalem, Andhra Pradesh",
+
+        paymentMethod: "CASH"
+
+    };
 
         await api.post("/api/orders", orderRequest);
 

@@ -35,13 +35,37 @@ function Orders() {
 
     };
     useEffect(() => {
-        fetchOrders();
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+
+        navigate("/login");
+
+        return;
+
+    }
+
+    fetchOrders();
+
     }, []);
     const fetchOrders = async () => {
 
     try {
 
-        const response = await api.get("/api/orders/user/1");
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        if (!user) {
+
+            showError("Please login first.");
+
+            navigate("/login");
+
+            return;
+
+        }
+
+        const response = await api.get(`/api/orders/user/${user.id}`);
 
         setOrders(response.data);
 

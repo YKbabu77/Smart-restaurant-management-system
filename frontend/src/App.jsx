@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
@@ -24,8 +25,21 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route
+            path="/cart"
+            element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+            }
+        />
+        <Route 
+            path="/orders" 
+            element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>} 
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />

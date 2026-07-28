@@ -68,11 +68,18 @@ function Menu(){
     const addToCart = async (food) => {
     try {
 
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        if (!user) {
+             showError("Please login first.");
+            return;
+        }
+
         const cartRequest = {
-            userId: 1,          // Temporary until JWT login
-            foodId: food.id,
-            quantity: 1
-        };
+        userId: user.id,
+        foodId: food.id,
+        quantity: 1
+    };
 
         await api.post("/api/cart", cartRequest);
 
