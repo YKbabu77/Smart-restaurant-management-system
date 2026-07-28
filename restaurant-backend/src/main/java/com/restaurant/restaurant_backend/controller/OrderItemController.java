@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.OrderItemDTO;
 import com.restaurant.restaurant_backend.entity.OrderItem;
 import com.restaurant.restaurant_backend.service.OrderItemService;
 
@@ -33,13 +34,13 @@ public class OrderItemController {
 
     // Get All Order Items
     @GetMapping
-    public ResponseEntity<List<OrderItem>> getAllOrderItems() {
+    public ResponseEntity<List<OrderItemDTO>> getAllOrderItems() {
         return ResponseEntity.ok(orderItemService.getAllOrderItems());
     }
 
     // Get Order Item By ID
     @GetMapping("/{id}")
-    public ResponseEntity<OrderItem> getOrderItemById(@PathVariable Long id) {
+    public ResponseEntity<OrderItemDTO> getOrderItemById(@PathVariable Long id) {
 
         return orderItemService.getOrderItemById(id)
                 .map(ResponseEntity::ok)
@@ -48,7 +49,7 @@ public class OrderItemController {
 
     // Get Order Items By Order
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<List<OrderItem>> getOrderItemsByOrder(@PathVariable Long orderId) {
+    public ResponseEntity<List<OrderItemDTO>> getOrderItemsByOrder(@PathVariable Long orderId) {
         return ResponseEntity.ok(orderItemService.getOrderItemsByOrder(orderId));
     }
 

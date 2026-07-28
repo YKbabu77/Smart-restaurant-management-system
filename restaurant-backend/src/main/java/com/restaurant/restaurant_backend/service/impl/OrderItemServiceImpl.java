@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restaurant.restaurant_backend.dto.OrderItemDTO;
 import com.restaurant.restaurant_backend.entity.OrderItem;
+import com.restaurant.restaurant_backend.mapper.OrderItemMapper;
 import com.restaurant.restaurant_backend.repository.OrderItemRepository;
 import com.restaurant.restaurant_backend.service.OrderItemService;
 
@@ -22,18 +24,26 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public List<OrderItem> getAllOrderItems() {
-        return orderItemRepository.findAll();
+    public List<OrderItemDTO> getAllOrderItems() {
+        return orderItemRepository.findAll()  .stream()
+            .map(OrderItemMapper::toDTO)
+            .toList();
     }
 
     @Override
-    public Optional<OrderItem> getOrderItemById(Long id) {
-        return orderItemRepository.findById(id);
+    public Optional<OrderItemDTO> getOrderItemById(Long id) {
+        OrderItem orderItem = orderItemRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Food not found"));
+        return Optional.of(OrderItemMapper.toDTO(orderItem));
+        // return orderItemRepository.findById(id);
     }
 
     @Override
-    public List<OrderItem> getOrderItemsByOrder(Long orderId) {
-        return orderItemRepository.findByOrderId(orderId);
+    public List<OrderItemDTO> getOrderItemsByOrder(Long orderId) {
+        return orderItemRepository.findByOrderId(orderId)
+            .stream()
+            .map(OrderItemMapper::toDTO)
+            .toList();
     }
 
     @Override
