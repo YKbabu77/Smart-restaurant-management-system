@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restaurant.restaurant_backend.dto.CategoryDTO;
 import com.restaurant.restaurant_backend.entity.Category;
+import com.restaurant.restaurant_backend.mapper.CategoryMapper;
 import com.restaurant.restaurant_backend.repository.CategoryRepository;
 import com.restaurant.restaurant_backend.service.CategoryService;
 
@@ -22,13 +24,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<CategoryDTO> getAllCategories() {
+        return categoryRepository.findAll()
+            .stream()
+            .map(CategoryMapper::toDTO)
+            .toList();
     }
 
     @Override
-    public Optional<Category> getCategoryById(Long id) {
-        return categoryRepository.findById(id);
+    public Optional<CategoryDTO> getCategoryById(Long id) {
+        Category category = categoryRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Category not found"));
+            return Optional.of(CategoryMapper.toDTO(category));
     }
 
     @Override

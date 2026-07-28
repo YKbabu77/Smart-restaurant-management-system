@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.CategoryDTO;
 import com.restaurant.restaurant_backend.entity.Category;
 import com.restaurant.restaurant_backend.service.CategoryService;
 
@@ -33,13 +34,13 @@ public class CategoryController {
 
     // Get All Categories
     @GetMapping
-    public ResponseEntity<List<Category>> getAllCategories() {
+    public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
     // Get Category By ID
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id) {
 
         return categoryService.getCategoryById(id)
                 .map(ResponseEntity::ok)

@@ -5,10 +5,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restaurant.restaurant_backend.dto.UserDTO;
 import com.restaurant.restaurant_backend.entity.User;
+import com.restaurant.restaurant_backend.mapper.UserMapper;
 import com.restaurant.restaurant_backend.repository.UserRepository;
 import com.restaurant.restaurant_backend.service.UserService;
-
 
 
 @Service
@@ -23,13 +24,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll()
+                            .stream()
+                            .map(UserMapper::toDTO)
+                            .toList();
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public Optional<UserDTO> getUserById(Long id) {
+         User user = userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return Optional.of(UserMapper.toDTO(user));
+        // return userRepository.findById(id)
+        //    .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override

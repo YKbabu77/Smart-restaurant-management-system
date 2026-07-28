@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.UserDTO;
 import com.restaurant.restaurant_backend.entity.User;
 import com.restaurant.restaurant_backend.service.UserService;
 @RestController
@@ -32,13 +33,13 @@ public class UserController {
 
     // Get All Users
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     // Get User By ID
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
 
         return userService.getUserById(id)
                 .map(ResponseEntity::ok)
