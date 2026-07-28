@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.OrderDTO;
 import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Order;
 import com.restaurant.restaurant_backend.service.OrderService;
@@ -34,13 +35,13 @@ public class OrderController {
 
     // Get All Orders
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders() {
+    public ResponseEntity<List<OrderDTO>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 
     // Get Order By ID
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long id) {
 
         return orderService.getOrderById(id)
                 .map(ResponseEntity::ok)
@@ -49,7 +50,7 @@ public class OrderController {
 
     // Get Orders By User
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Order>> getOrdersByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<OrderDTO>> getOrdersByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(orderService.getOrdersByUser(userId));
     }
 

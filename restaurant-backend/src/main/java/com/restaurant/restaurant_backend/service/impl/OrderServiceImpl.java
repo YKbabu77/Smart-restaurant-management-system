@@ -7,11 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restaurant.restaurant_backend.dto.OrderDTO;
 import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.entity.Order;
 import com.restaurant.restaurant_backend.entity.OrderItem;
 import com.restaurant.restaurant_backend.entity.User;
+import com.restaurant.restaurant_backend.mapper.OrderMapper;
 import com.restaurant.restaurant_backend.repository.CartRepository;
 import com.restaurant.restaurant_backend.repository.OrderItemRepository;
 import com.restaurant.restaurant_backend.repository.OrderRepository;
@@ -102,18 +104,28 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<OrderDTO> getAllOrders() {
+        return orderRepository.findAll()
+            .stream()
+            .map(order -> OrderMapper.toDTO(order))
+            .toList();
     }
 
     @Override
-    public Optional<Order> getOrderById(Long id) {
-        return orderRepository.findById(id);
+    public Optional<OrderDTO> getOrderById(Long id) {
+        Order order = orderRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        return Optional.of(OrderMapper.toDTO(order));
+
     }
 
     @Override
-    public List<Order> getOrdersByUser(Long userId) {
-        return orderRepository.findByUserIdOrderByOrderDateDesc(userId);
+    public List<OrderDTO> getOrdersByUser(Long userId) {
+        return orderRepository.findByUserIdOrderByOrderDateDesc(userId)
+            .stream()
+            .map(OrderMapper::toDTO)
+            .toList();
     }
 
     @Override
