@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restaurant.restaurant_backend.dto.FoodDTO;
 import com.restaurant.restaurant_backend.entity.Food;
+import com.restaurant.restaurant_backend.mapper.FoodMapper;
 import com.restaurant.restaurant_backend.repository.FoodRepository;
 import com.restaurant.restaurant_backend.service.FoodService;
 
@@ -23,22 +25,27 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> getAllFoods() {
-        return foodRepository.findAll();
+    public List<FoodDTO> getAllFoods() {
+        return foodRepository.findAll()
+            .stream()
+            .map(FoodMapper::toDTO)
+            .toList();
     }
 
     @Override
-    public Optional<Food> getFoodById(Long id) {
-        return foodRepository.findById(id);
+    public Optional<FoodDTO> getFoodById(Long id) {
+        Food food = foodRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Food not found"));
+        return Optional.of(FoodMapper.toDTO(food));
     }
 
     @Override
-    public List<Food> getFoodsByCategory(Long categoryId) {
+    public List<FoodDTO> getFoodsByCategory(Long categoryId) {
         return foodRepository.findByCategoryId(categoryId);
     }
 
     @Override
-    public List<Food> getAvailableFoods() {
+    public List<FoodDTO> getAvailableFoods() {
         return foodRepository.findByIsAvailableTrue();
     }
 

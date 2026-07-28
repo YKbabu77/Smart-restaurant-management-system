@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.FoodDTO;
 import com.restaurant.restaurant_backend.entity.Food;
 import com.restaurant.restaurant_backend.service.FoodService;
 
@@ -33,13 +34,13 @@ public class FoodController {
 
     // Get All Foods
     @GetMapping
-    public ResponseEntity<List<Food>> getAllFoods() {
+    public ResponseEntity<List<FoodDTO>> getAllFoods() {
         return ResponseEntity.ok(foodService.getAllFoods());
     }
 
     // Get Food By ID
     @GetMapping("/{id}")
-    public ResponseEntity<Food> getFoodById(@PathVariable Long id) {
+    public ResponseEntity<FoodDTO> getFoodById(@PathVariable Long id) {
 
         return foodService.getFoodById(id)
                 .map(ResponseEntity::ok)

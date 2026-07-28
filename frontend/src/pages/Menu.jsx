@@ -61,7 +61,7 @@ function Menu(){
 
     const matchesCategory =
         selectedCategory === "All" ||
-        food.category.name === selectedCategory;
+        food.categoryName === selectedCategory;
 
     return matchesSearch && matchesCategory;
 });
