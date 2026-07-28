@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.restaurant.restaurant_backend.dto.FoodDTO;
 import com.restaurant.restaurant_backend.entity.Food;
+import com.restaurant.restaurant_backend.exception.ResourceNotFoundException;
 import com.restaurant.restaurant_backend.mapper.FoodMapper;
 import com.restaurant.restaurant_backend.repository.FoodRepository;
 import com.restaurant.restaurant_backend.service.FoodService;
@@ -35,7 +36,7 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public Optional<FoodDTO> getFoodById(Long id) {
         Food food = foodRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Food not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Food not found"));
         return Optional.of(FoodMapper.toDTO(food));
     }
 

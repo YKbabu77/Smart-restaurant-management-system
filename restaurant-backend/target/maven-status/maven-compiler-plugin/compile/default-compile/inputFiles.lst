@@ -1,3 +1,4 @@
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\controller\AuthController.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\controller\CartController.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\controller\CategoryController.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\controller\FoodController.java
@@ -9,9 +10,11 @@ D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\r
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\CartRequest.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\CategoryDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\FoodDTO.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\LoginRequestDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\OrderDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\OrderItemDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\OrderRequest.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\RegisterRequestDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\UserDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\entity\Cart.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\entity\Category.java
@@ -23,6 +26,9 @@ D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\r
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\entity\PaymentStatus.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\entity\Role.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\entity\User.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\exception\ErrorResponse.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\exception\GlobalExceptionHandler.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\exception\ResourceNotFoundException.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\mapper\CartMapper.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\mapper\CategoryMapper.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\mapper\FoodMapper.java
@@ -36,9 +42,11 @@ D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\r
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\repository\OrderRepository.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\repository\UserRepository.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\RestaurantBackendApplication.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\AuthService.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\CartService.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\CategoryService.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\FoodService.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\impl\AuthServiceImpl.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\impl\CartServiceImpl.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\impl\CategoryServiceImpl.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\service\impl\FoodServiceImpl.java

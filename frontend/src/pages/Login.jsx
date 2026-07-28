@@ -1,10 +1,68 @@
 //this is the login page 
 import "../styles/Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import axios from "axios";
 
 function Login() {
+    const navigate = useNavigate();
 
+    const [loginData, setLoginData] = useState({
+    email: "",
+    password: ""
+    });
+
+    const [message, setMessage] = useState("");
+    const handleChange = (e) => {
+    setLoginData({
+        ...loginData,
+        [e.target.name]: e.target.value
+    });
+    };
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+
+        const response = await axios.post(
+            "http://localhost:8080/api/auth/login",
+            loginData
+        );
+
+        // Save logged-in user
+        localStorage.setItem(
+            "user",
+            JSON.stringify(response.data)
+        );
+
+        setMessage("Login Successful!");
+
+        setTimeout(() => {
+            navigate("/");
+        }, 1000);
+
+    } catch (error) {
+
+    console.log(error);
+    console.log(error.response);
+    console.log(error.message);
+
+    if (error.response) {
+
+        if (error.response.data.error) {
+            setMessage(error.response.data.error);
+        } else {
+            setMessage("Login Failed");
+        }
+
+    } else {
+
+        setMessage(error.message);
+
+    }
+    }
+    };
     return (
 
         <div className="login-page">
@@ -22,7 +80,7 @@ function Login() {
                     Login to your account
                 </p>
 
-                <form>
+                <form onSubmit={handleSubmit}>
 
                     <div className="form-group">
 
@@ -30,6 +88,9 @@ function Login() {
 
                         <input
                             type="email"
+                            name="email"
+                            value={loginData.email}
+                            onChange={handleChange}
                             placeholder="Enter your email"
                         />
 
@@ -41,6 +102,9 @@ function Login() {
 
                         <input
                             type="password"
+                             name="password"
+                            value={loginData.password}
+                            onChange={handleChange}
                             placeholder="Enter your password"
                         />
 
@@ -61,7 +125,17 @@ function Login() {
                         </a>
 
                     </div>
-
+                    {message && (
+                        <p
+                            style={{
+                            color: message.includes("Successful") ? "green" : "red",
+                            marginBottom: "15px",
+                            fontWeight: "bold"
+                         }}
+                        >
+                            {message}
+                        </p>
+                    )}
                     <button
                         className="login-btn"
                         type="submit"

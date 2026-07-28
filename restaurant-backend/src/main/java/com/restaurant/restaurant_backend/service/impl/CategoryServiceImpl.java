@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.restaurant.restaurant_backend.dto.CategoryDTO;
 import com.restaurant.restaurant_backend.entity.Category;
+import com.restaurant.restaurant_backend.exception.ResourceNotFoundException;
 import com.restaurant.restaurant_backend.mapper.CategoryMapper;
 import com.restaurant.restaurant_backend.repository.CategoryRepository;
 import com.restaurant.restaurant_backend.service.CategoryService;
@@ -34,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<CategoryDTO> getCategoryById(Long id) {
         Category category = categoryRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Category not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
             return Optional.of(CategoryMapper.toDTO(category));
     }
 
@@ -42,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category updateCategory(Long id, Category category) {
 
         Category existingCategory = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         existingCategory.setName(category.getName());
         existingCategory.setDescription(category.getDescription());

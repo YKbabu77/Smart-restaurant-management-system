@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.restaurant.restaurant_backend.dto.OrderItemDTO;
 import com.restaurant.restaurant_backend.entity.OrderItem;
+import com.restaurant.restaurant_backend.exception.ResourceNotFoundException;
 import com.restaurant.restaurant_backend.mapper.OrderItemMapper;
 import com.restaurant.restaurant_backend.repository.OrderItemRepository;
 import com.restaurant.restaurant_backend.service.OrderItemService;
@@ -33,7 +34,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public Optional<OrderItemDTO> getOrderItemById(Long id) {
         OrderItem orderItem = orderItemRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Food not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Order item not found"));
         return Optional.of(OrderItemMapper.toDTO(orderItem));
         // return orderItemRepository.findById(id);
     }
@@ -50,7 +51,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     public OrderItem updateOrderItem(Long id, OrderItem orderItem) {
 
         OrderItem existingOrderItem = orderItemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order item not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Order item not found"));
 
         existingOrderItem.setOrder(orderItem.getOrder());
         existingOrderItem.setFood(orderItem.getFood());

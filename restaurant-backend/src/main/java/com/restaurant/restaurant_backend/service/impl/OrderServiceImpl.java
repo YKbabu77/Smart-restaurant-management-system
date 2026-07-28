@@ -13,6 +13,7 @@ import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.entity.Order;
 import com.restaurant.restaurant_backend.entity.OrderItem;
 import com.restaurant.restaurant_backend.entity.User;
+import com.restaurant.restaurant_backend.exception.ResourceNotFoundException;
 import com.restaurant.restaurant_backend.mapper.OrderMapper;
 import com.restaurant.restaurant_backend.repository.CartRepository;
 import com.restaurant.restaurant_backend.repository.OrderItemRepository;
@@ -114,7 +115,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Optional<OrderDTO> getOrderById(Long id) {
         Order order = orderRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Order not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
 
         return Optional.of(OrderMapper.toDTO(order));
 
@@ -132,7 +133,7 @@ public class OrderServiceImpl implements OrderService {
     public Order updateOrder(Long id, Order order) {
 
         Order existingOrder = orderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
 
         existingOrder.setOrderDate(order.getOrderDate());
         existingOrder.setTotalAmount(order.getTotalAmount());

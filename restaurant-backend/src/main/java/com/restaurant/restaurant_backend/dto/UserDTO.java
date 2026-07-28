@@ -3,11 +3,29 @@ package com.restaurant.restaurant_backend.dto;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+
 public class UserDTO {
 
     private Long id;
+
+    @NotBlank(message = "Full name is required")
+    @Size(min = 3, max = 50, message = "Full name must be between 3 and 50 characters")
     private String fullName;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Please enter a valid email")
     private String email;
+
+    @NotBlank(message = "Phone number is required")
+    @Pattern(
+        regexp = "^[6-9]\\d{9}$",
+        message = "Please enter a valid 10-digit phone number"
+    )
     private String phone;
     private String role;
     private Date dateOfBirth;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.restaurant.restaurant_backend.dto.UserDTO;
 import com.restaurant.restaurant_backend.entity.User;
+import com.restaurant.restaurant_backend.exception.ResourceNotFoundException;
 import com.restaurant.restaurant_backend.mapper.UserMapper;
 import com.restaurant.restaurant_backend.repository.UserRepository;
 import com.restaurant.restaurant_backend.service.UserService;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserDTO> getUserById(Long id) {
          User user = userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         return Optional.of(UserMapper.toDTO(user));
         // return userRepository.findById(id)

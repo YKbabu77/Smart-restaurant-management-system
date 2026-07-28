@@ -11,6 +11,7 @@ import com.restaurant.restaurant_backend.dto.CartRequest;
 import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.entity.Food;
 import com.restaurant.restaurant_backend.entity.User;
+import com.restaurant.restaurant_backend.exception.ResourceNotFoundException;
 import com.restaurant.restaurant_backend.mapper.CartMapper;
 import com.restaurant.restaurant_backend.repository.CartRepository;
 import com.restaurant.restaurant_backend.repository.FoodRepository;
@@ -70,7 +71,7 @@ public class CartServiceImpl implements CartService {
     public Cart updateCartItem(Long id, Cart cart) {
 
          Cart existingCart = cartRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Cart item not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
 
         existingCart.setQuantity(cart.getQuantity());
 
