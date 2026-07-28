@@ -15,6 +15,8 @@ import Register from "./pages/Register";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminFoods from "./pages/AdminFoods";
 
 function App() {
   return (
@@ -39,6 +41,22 @@ function App() {
             <ProtectedRoute>
               <Orders />
             </ProtectedRoute>} 
+        />
+        <Route
+          path="/admin"
+          element={
+              <ProtectedRoute>
+                  <AdminDashboard />
+              </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/foods"
+          element={
+            <ProtectedRoute>
+              <AdminFoods />
+            </ProtectedRoute>
+          }
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

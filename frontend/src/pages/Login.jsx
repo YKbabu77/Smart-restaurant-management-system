@@ -61,7 +61,11 @@ function Login() {
 
         );
 
-        navigate("/");
+        if (response.data.role === "ADMIN") {
+            navigate("/admin");
+        } else {
+            navigate("/");
+        }
 
     } catch (error) {
 
@@ -91,7 +95,13 @@ function Login() {
         setMessage("Login Successful!");
 
         setTimeout(() => {
+
+        if (response.data.role === "ADMIN") {
+            navigate("/admin");
+        } else {
             navigate("/");
+        }
+
         }, 1000);
 
     } catch (error) {
