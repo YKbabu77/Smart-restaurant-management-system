@@ -129,3 +129,36 @@ flex-direction:column;
 }
 
 }
+.empty-cart{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:100px 20px;
+
+}
+
+.empty-cart h2{
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+}
+
+.empty-cart p{
+
+    font-size:1.1rem;
+
+    margin-bottom:30px;
+
+    color:#666;
+
+}

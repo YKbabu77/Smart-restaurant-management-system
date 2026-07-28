@@ -10,6 +10,6 @@ import com.restaurant.restaurant_backend.entity.Order;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    List<Order> findByUserId(Long userId);
+    List<Order> findByUserIdOrderByOrderDateDesc(Long userId);
 
 }

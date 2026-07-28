@@ -8,25 +8,11 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import Loader from "../components/Loader";
 import { showError, showSuccess } from "../utils/toast";
+import { useNavigate } from "react-router-dom";
 
-// const cartItems = [
-//     {
-//         id: 1,
-//         name: "Margherita Pizza",
-//         price: 299,
-//         quantity: 2,
-//         image: pizza
-//     },
-//     {
-//         id: 2,
-//         name: "Chicken Burger",
-//         price: 199,
-//         quantity: 1,
-//         image: burger
-//     }
-// ];
 
 function Cart() {
+    const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -112,7 +98,65 @@ function Cart() {
     }
 
     };
+    const checkout = async () => {
 
+    try {
+
+        const orderRequest = {
+            userId: 1, // Temporary until JWT Authentication
+            deliveryAddress: "Ravulapalem, Andhra Pradesh",
+            paymentMethod: "CASH"
+        };
+
+        await api.post("/api/orders", orderRequest);
+
+        showSuccess("Order placed successfully!");
+
+        fetchCart();
+
+        navigate("/orders");
+
+    } catch (error) {
+
+        console.error(error);
+
+        showError("Unable to place order.");
+
+    }
+
+    };
+    if (cartItems.length === 0) {
+
+    return (
+
+        <div className="cart-page">
+
+            <Helmet>
+                <title>Food Paradise | Cart</title>
+            </Helmet>
+
+            <div className="empty-cart">
+
+                <h2>🛒 Your Cart is Empty</h2>
+
+                <p>
+                    Browse our delicious menu and add your favorite dishes.
+                </p>
+
+                <button
+                    className="continue-btn"
+                    onClick={() => navigate("/menu")}
+                >
+                    Go to Menu
+                </button>
+
+            </div>
+
+        </div>
+
+    );
+
+    }
     return (
         <div className="cart-page">
           <Helmet>
@@ -185,11 +229,14 @@ function Cart() {
 
                     <div className="cart-buttons">
 
-                        <button className="continue-btn">
+                        <button className="continue-btn"
+                         onClick={() => navigate("/menu")}>
                             Continue Shopping
                         </button>
 
-                        <button className="checkout-btn">
+                        <button className="checkout-btn"
+                         onClick={checkout}
+                        >
                             Checkout
                         </button>
 

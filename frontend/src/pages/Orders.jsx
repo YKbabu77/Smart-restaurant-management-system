@@ -1,42 +1,115 @@
 //This is the orders page
 import "../styles/Orders.css";
 import { Helmet } from "react-helmet-async";
-
-const orders = [
-    {
-        id: 1001,
-        date: "25 July 2026",
-        status: "Delivered",
-        total: 797,
-        items: [
-            "Margherita Pizza x2",
-            "Chicken Burger x1"
-        ]
-    },
-    {
-        id: 1002,
-        date: "20 July 2026",
-        status: "Preparing",
-        total: 447,
-        items: [
-            "Grilled Chicken x1",
-            "Cold Drink x2"
-        ]
-    },
-    {
-        id: 1003,
-        date: "15 July 2026",
-        status: "Cancelled",
-        total: 198,
-        items: [
-            "Veg Pizza x1",
-            "Soft Drink x1"
-        ]
-    }
-];
+import { useEffect, useState } from "react";
+import api from "../services/api";
+import Loader from "../components/Loader";
+import { showError } from "../utils/toast";
 
 function Orders() {
+    const [selectedOrderItems, setSelectedOrderItems] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const getStatusLabel = (status) => {
 
+    switch (status) {
+
+        case "PENDING":
+            return "Pending";
+
+        case "CONFIRMED":
+            return "Confirmed";
+
+        case "DELIVERED":
+            return "Delivered";
+
+        case "CANCELLED":
+            return "Cancelled";
+
+        default:
+            return status;
+    }
+
+    };
+    useEffect(() => {
+        fetchOrders();
+    }, []);
+    const fetchOrders = async () => {
+
+    try {
+
+        const response = await api.get("/api/orders/user/1");
+
+        setOrders(response.data);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showError("Unable to load orders.");
+
+    } finally {
+
+        setLoading(false);
+
+    }
+
+    };
+    if (loading) {
+    return <Loader />;
+    }
+    const viewDetails = async (orderId) => {
+
+    try {
+
+        const response = await api.get(`/api/order-items/order/${orderId}`);
+
+        setSelectedOrderItems(response.data);
+
+        setShowModal(true);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showError("Unable to load order details.");
+
+    }
+
+    };
+    if (!loading && orders.length === 0) {
+
+    return (
+
+        <div className="orders-page">
+
+            <Helmet>
+                <title>Food Paradise | My Orders</title>
+            </Helmet>
+
+            <div className="empty-orders">
+
+                <h2>You haven't placed any orders yet.</h2>
+
+                <p>
+                    Your order history will appear here after your first order.
+                </p>
+
+                <button
+                    className="order-btn"
+                    onClick={() => navigate("/menu")}
+                >
+                    Order Now
+                </button>
+
+            </div>
+
+        </div>
+
+    );
+
+    }
     return (
 
         <div className="orders-page">
@@ -65,21 +138,25 @@ function Orders() {
 
                             </div>
 
-                            <div className="order-status">
-
-                                {order.status}
-
+                            <div className={`order-status ${order.status.toLowerCase()}`}>
+                                     {getStatusLabel(order.status)}
                             </div>
 
                         </div>
 
                         <p className="order-date">
 
-                            Date : {order.date}
+                            Date : {
+                                new Date(order.orderDate).toLocaleDateString("en-IN", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                })
+                            }
 
                         </p>
 
-                        <ul className="order-items">
+                        {/* <ul className="order-items">
 
                             {order.items.map((item,index)=>(
 
@@ -91,15 +168,16 @@ function Orders() {
 
                             ))}
 
-                        </ul>
+                        </ul> */}
 
                         <p className="order-total">
 
-                            Total : ₹{order.total}
+                            Total : ₹{order.totalAmount}
 
                         </p>
 
-                        <button className="order-btn">
+                        <button className="order-btn"
+                        onClick={() => viewDetails(order.id)}>
 
                             View Details
 
@@ -110,6 +188,51 @@ function Orders() {
                 ))}
 
             </div>
+            {showModal && (
+
+    <div className="modal-overlay">
+
+        <div className="modal">
+
+            <h2>Order Details</h2>
+
+            {selectedOrderItems.map(item => (
+
+                <div key={item.id} className="modal-item">
+
+                    <img
+                        src={item.food.imageUrl}
+                        alt={item.food.name}
+                        width="80"
+                    />
+
+                    <div>
+
+                        <h3>{item.food.name}</h3>
+
+                        <p>Price : ₹{item.price}</p>
+
+                        <p>Quantity : {item.quantity}</p>
+
+                        <p>Subtotal : ₹{item.price * item.quantity}</p>
+
+                    </div>
+
+                </div>
+
+            ))}
+
+            <button className="order-btn"
+                onClick={() => setShowModal(false)}
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+    )}
 
         </div>
 

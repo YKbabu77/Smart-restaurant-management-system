@@ -5,9 +5,13 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import Loader from "../components/Loader";
 import { showError, showSuccess } from "../utils/toast";
+import { useLocation } from "react-router-dom";
 
 
 function Menu(){
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const urlCategory = queryParams.get("category");
     const [foods, setFoods] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -40,7 +44,14 @@ function Menu(){
     }
 
    };
-    if (loading) {
+    useEffect(() => {
+    if (urlCategory) {
+        setSelectedCategory(urlCategory);
+    } else {
+        setSelectedCategory("All");
+    }
+}, [urlCategory]);
+     if (loading) {
         return <Loader />;
     }
     const filteredFoods = foods.filter((food) => {

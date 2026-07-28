@@ -3,11 +3,14 @@ package com.restaurant.restaurant_backend.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Order;
+
+
 
 public interface OrderService {
 
-    Order saveOrder(Order order);
+    Order placeOrder(OrderRequest request);
 
     List<Order> getAllOrders();
 

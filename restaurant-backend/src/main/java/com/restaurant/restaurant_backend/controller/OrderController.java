@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Order;
 import com.restaurant.restaurant_backend.service.OrderService;
-
 @RestController
 @RequestMapping("/api/orders")
 @CrossOrigin(origins = "*")
@@ -27,8 +27,9 @@ public class OrderController {
 
     // Create Order
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        return ResponseEntity.ok(orderService.saveOrder(order));
+    public ResponseEntity<Order> createOrder(@RequestBody OrderRequest request) {
+        
+        return ResponseEntity.ok(orderService.placeOrder(request));
     }
 
     // Get All Orders

@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import Loader from "../components/Loader";
 import { showError } from "../utils/toast";
+import { useNavigate } from "react-router-dom";
 
 function Categories() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
     useEffect(() => {
 
       fetchCategories();
@@ -71,7 +73,10 @@ function Categories() {
 
                             <p>{category.description}</p>
 
-                            <button className="category-btn">
+                            <button className="category-btn"
+                             onClick={() =>
+                                    navigate(`/menu?category=${encodeURIComponent(category.name)}`)}
+                            >
                                 View Menu
                             </button>
 

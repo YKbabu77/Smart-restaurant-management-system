@@ -2,8 +2,10 @@ import biryani from "../assets/biryani.jpg";
 import "../styles/Home.css";
 import { showSuccess } from "../utils/toast";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <div>
       <Helmet>
@@ -28,7 +30,10 @@ function Home() {
             fresh ingredients and delivered straight to your doorstep.
           </p>
 
-          <button className="hero-btn"   onClick={() => showSuccess("Welcome to Food Paradise!")}>
+          <button className="hero-btn"   
+           onClick={() => navigate("/menu")}
+           //onClick={() => showSuccess("Welcome to Food Paradise!")}
+           >
              Order Now
           </button>
 
@@ -134,7 +139,7 @@ function Home() {
 
         <h2>Ready to Order Delicious Food?</h2>
 
-        <button>
+        <button   onClick={() => navigate("/menu")}>
           Explore Menu
         </button>
 

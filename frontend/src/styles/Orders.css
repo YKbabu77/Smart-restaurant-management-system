@@ -37,10 +37,62 @@
 }
 
 .order-status{
-    color:green;
-    font-weight:bold;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
+.order-status::before{
+
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+}
+/* Pending */
+
+.order-status.pending{
+    background: #FFF3CD;
+    color: #8A6D00;
+}
+
+.order-status.pending::before{
+    background: #FFC107;
+}
+
+.order-status.confirmed{
+    background: #DCEBFF;
+    color: #0D6EFD;
+}
+
+.order-status.confirmed::before{
+    background: #0D6EFD;
+}
+
+.order-status.delivered{
+    background: #DDF7E5;
+    color: #198754;
+}
+
+.order-status.delivered::before{
+    background: #198754;
+}
+
+.order-status.cancelled{
+    background: #FDE2E2;
+    color: #DC3545;
+}
+
+.order-status.cancelled::before{
+    background: #DC3545;
+}
 .order-date{
     color:#777;
     margin-bottom:15px;
@@ -89,5 +141,73 @@ align-items:flex-start;
 gap:10px;
 
 }
+
+}
+.modal-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal{
+
+    background:white;
+
+    width:600px;
+
+    max-height:80vh;
+
+    overflow:auto;
+
+    border-radius:10px;
+
+    padding:20px;
+
+}
+
+.modal-item{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-bottom:20px;
+
+    border-bottom:1px solid #ddd;
+
+    padding-bottom:15px;
+
+}
+.empty-orders{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:100px 20px;
+
+}
+
+.empty-orders h2{
+
+    margin-bottom:20px;
+
+}
+
+.empty-orders p{
+
+    margin-bottom:30px;
+
+    color:#666;
 
 }
