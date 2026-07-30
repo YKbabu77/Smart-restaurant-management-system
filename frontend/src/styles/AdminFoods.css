@@ -1,56 +1,217 @@
-.foods-content{
-    flex:1;
-    padding:30px;
-    background:#f4f6f9;
+.foods-content {
+    flex: 1;
+    padding: 30px;
+    background: #f4f6f9;
 }
 
-.foods-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+.foods-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.add-food-btn{
-    background:#ff6b00;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-.add-food-btn:hover{
-    background:#e55d00;
+.add-food-btn,
+.undo-btn {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,.1);
+.add-food-btn {
+    background: #ff6b00;
+    color: white;
 }
 
-th{
-    background:#1f2937;
-    color:white;
-    padding:15px;
+.add-food-btn:hover {
+    background: #e55d00;
 }
 
-td{
-    padding:15px;
-    text-align:center;
-    border-bottom:1px solid #eee;
+.undo-btn {
+    background: #2563eb;
+    color: white;
 }
 
-tr:hover{
-    background:#fafafa;
+.undo-btn:hover {
+    background: #1d4ed8;
 }
 
-td button{
-    margin:0 5px;
-    padding:6px 12px;
-    cursor:pointer;
+.food-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.food-modal {
+    width: min(650px, 100%);
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.food-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.close-modal-btn {
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.food-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.food-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #374151;
+    gap: 6px;
+}
+
+.food-form input,
+.food-form textarea,
+.food-form select {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.checkbox-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.checkbox-row label {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.cancel-btn,
+.save-btn {
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.save-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #d1d5db;
+}
+
+.save-btn:hover {
+    background: #15803d;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+th {
+    background: #1f2937;
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background: #fafafa;
+}
+
+td button {
+    margin: 0 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.food-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.edit-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background: #2980b9;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
 }

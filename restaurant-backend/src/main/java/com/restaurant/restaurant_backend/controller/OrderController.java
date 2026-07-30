@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.restaurant_backend.dto.OrderDTO;
+import com.restaurant.restaurant_backend.dto.OrderDetailsDTO;
 import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Order;
 import com.restaurant.restaurant_backend.service.OrderService;
+
 @RestController
 @RequestMapping("/api/orders")
 @CrossOrigin(origins = "*")
@@ -29,7 +31,7 @@ public class OrderController {
     // Create Order
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest request) {
-        
+
         return ResponseEntity.ok(orderService.placeOrder(request));
     }
 
@@ -57,7 +59,7 @@ public class OrderController {
     // Update Order
     @PutMapping("/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long id,
-                                             @RequestBody Order order) {
+            @RequestBody Order order) {
 
         return ResponseEntity.ok(orderService.updateOrder(id, order));
     }
@@ -69,5 +71,15 @@ public class OrderController {
         orderService.deleteOrder(id);
 
         return ResponseEntity.ok("Order deleted successfully.");
+    }
+
+    @GetMapping("/{id}/details")
+    public ResponseEntity<OrderDetailsDTO> getOrderDetails(
+            @PathVariable Long id) {
+
+        return orderService.getOrderDetails(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+
     }
 }

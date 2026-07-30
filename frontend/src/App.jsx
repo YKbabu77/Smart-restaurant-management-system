@@ -17,6 +17,9 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminFoods from "./pages/AdminFoods";
+import AdminCategories from "./pages/AdminCategories";
+import AdminOrders from "./pages/AdminOrders";
+import AdminCustomers from "./pages/AdminCustomers";
 
 function App() {
   return (
@@ -28,26 +31,26 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/categories" element={<Categories />} />
         <Route
-            path="/cart"
-            element={
+          path="/cart"
+          element={
             <ProtectedRoute>
               <Cart />
             </ProtectedRoute>
-            }
+          }
         />
-        <Route 
-            path="/orders" 
-            element={
+        <Route
+          path="/orders"
+          element={
             <ProtectedRoute>
               <Orders />
-            </ProtectedRoute>} 
+            </ProtectedRoute>}
         />
         <Route
           path="/admin"
           element={
-              <ProtectedRoute>
-                  <AdminDashboard />
-              </ProtectedRoute>
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
           }
         />
         <Route
@@ -55,6 +58,30 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminFoods />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/categories"
+          element={
+            <ProtectedRoute>
+              <AdminCategories />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <ProtectedRoute>
+              <AdminOrders />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/admin/customers"
+          element={
+            <ProtectedRoute>
+              <AdminCustomers />
             </ProtectedRoute>
           }
         />

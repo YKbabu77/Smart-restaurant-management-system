@@ -1,0 +1,137 @@
+.categories-content{
+    flex:1;
+    padding:30px;
+    background:#f4f6f9;
+}
+
+.categories-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.add-category-btn{
+    background:#ff6b00;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.add-category-btn:hover{
+    background:#e55d00;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+th{
+    background:#1f2937;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+.edit-btn{
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    margin-right:8px;
+    cursor:pointer;
+}
+
+.delete-btn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.category-image{
+
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:10px;
+
+}
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal{
+    background:white;
+    width:420px;
+    padding:25px;
+    border-radius:12px;
+}
+
+.modal input,
+.modal textarea,
+.modal select{
+
+    width:100%;
+    padding:10px;
+    margin-top:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    box-sizing:border-box;
+
+}
+
+.modal textarea{
+    height:90px;
+    resize:none;
+}
+
+.modal-buttons{
+
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:20px;
+
+}
+
+.save-btn{
+
+    background:#ff6b00;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+
+}
+
+.cancel-btn{
+
+    background:#777;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+
+}

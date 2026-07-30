@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.restaurant.restaurant_backend.dto.OrderDTO;
+import com.restaurant.restaurant_backend.dto.OrderDetailsDTO;
 import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Order;
 
@@ -22,4 +23,5 @@ public interface OrderService {
     Order updateOrder(Long id, Order order);
 
     void deleteOrder(Long id);
+    Optional<OrderDetailsDTO> getOrderDetails(Long id);
 }

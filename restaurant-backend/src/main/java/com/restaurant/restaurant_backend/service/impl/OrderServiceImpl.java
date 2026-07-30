@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restaurant.restaurant_backend.dto.OrderDTO;
+import com.restaurant.restaurant_backend.dto.OrderDetailsDTO;
 import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.entity.Order;
@@ -148,5 +149,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
+    }
+    @Override
+    public Optional<OrderDetailsDTO> getOrderDetails(Long id) {
+
+        Order order = orderRepository.findById(id)
+                .orElseThrow(()
+                        -> new ResourceNotFoundException("Order not found"));
+
+        return Optional.of(OrderMapper.toDetailsDTO(order));
+
     }
 }
