@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig {
 
     @Bean
-    WebMvcConfigurer corsConfigurer() {
+    public WebMvcConfigurer corsConfigurer() {
 
         return new WebMvcConfigurer() {
 
@@ -17,15 +17,13 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
-                        .allowedMethods(
-                                "GET",
-                                "POST",
-                                "PUT",
-                                "DELETE",
-                                "OPTIONS"
+                        .allowedOrigins(
+                                "http://localhost:5173",
+                                "https://restaurant-management-system-xi-five.vercel.app"
                         )
-                        .allowedHeaders("*");
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
 
             }
 
