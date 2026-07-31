@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../components/AdminSidebar";
 import "../styles/AdminCustomers.css";
+import api from "../services/api";
+
 
 function AdminCustomers() {
 
@@ -32,9 +34,7 @@ function AdminCustomers() {
 
         try {
 
-            const response = await axios.get(
-                "http://localhost:8080/api/users"
-            );
+            const response = await api.get("/api/users");
 
             setCustomers(response.data);
 
@@ -100,11 +100,7 @@ function AdminCustomers() {
 
         try {
 
-            await axios.delete(
-
-                `http://localhost:8080/api/users/${id}`
-
-            );
+            await api.delete(`/api/users/${id}`);
 
             alert("Customer deleted.");
 
@@ -142,9 +138,9 @@ function AdminCustomers() {
 
         try {
 
-            await axios.put(
+            await api.put(
 
-                `http://localhost:8080/api/users/${selectedCustomer.id}`,
+                `/api/users/${selectedCustomer.id}`,
 
                 {
 
@@ -177,9 +173,7 @@ function AdminCustomers() {
 
         try {
 
-            const response = await axios.get(
-                `http://localhost:8080/api/users/${id}`
-            );
+            const response = await api.get(`/api/users/${id}`);
 
             setViewCustomer(response.data);
 

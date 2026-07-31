@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import axios from "axios";
+import api from "../services/api";
 
 function Login() {
     const navigate = useNavigate();
@@ -45,13 +46,7 @@ function Login() {
 
         };
 
-        const response = await axios.post(
-
-            "http://localhost:8080/api/auth/login",
-
-            demoCredentials
-
-        );
+        const response = await api.post("/api/auth/login", demoCredentials);
 
         localStorage.setItem(
 
@@ -81,10 +76,7 @@ function Login() {
 
     try {
 
-        const response = await axios.post(
-            "http://localhost:8080/api/auth/login",
-            loginData
-        );
+        const response = await api.post("/api/auth/login", loginData);
 
         // Save logged-in user
         localStorage.setItem(

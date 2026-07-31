@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../components/AdminSidebar";
 import "../styles/AdminFoods.css";
+import api from "../services/api";
 
 function AdminFoods() {
 
@@ -93,7 +94,7 @@ function AdminFoods() {
 
     const loadFoods = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/foods");
+            const response = await api.get("/api/foods");
             setFoods(response.data);
         } catch (error) {
             console.error(error);
@@ -102,7 +103,7 @@ function AdminFoods() {
 
     const loadCategories = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/categories");
+            const response = await api.get("/api/categories");
             setCategories(response.data);
             if (response.data.length > 0) {
                 setFormData((prev) => ({ ...prev, categoryId: response.data[0].id.toString() }));
@@ -178,10 +179,10 @@ function AdminFoods() {
             };
 
             if (editingFoodId) {
-                await axios.put(`http://localhost:8080/api/foods/${editingFoodId}`, payload);
+                await api.put(`/api/foods/${editingFoodId}`, payload);
                 alert("Food updated successfully.");
             } else {
-                await axios.post("http://localhost:8080/api/foods", payload);
+                await api.post("/api/foods", payload);
                 alert("Food added successfully.");
             }
 
@@ -204,7 +205,7 @@ function AdminFoods() {
 
         try {
             const deletedFood = foods.find((food) => food.id === id);
-            await axios.delete(`http://localhost:8080/api/foods/${id}`);
+            await api.delete(`/api/foods/${id}`);
             const foodToStore = deletedFood || null;
             setLastDeletedFood(foodToStore);
             if (foodToStore) {
@@ -243,7 +244,7 @@ function AdminFoods() {
                 }
             };
 
-            await axios.post("http://localhost:8080/api/foods", payload);
+            await api.post("/api/foods", payload);
             setLastDeletedFood(null);
             clearDeletedFoodStorage();
             alert("Food restored successfully.");
@@ -415,7 +416,7 @@ function AdminFoods() {
                             <tr key={food.id}>
                                 <td>
                                     <img
-                                        src={`http://localhost:8080${food.imageUrl}`}
+                                        src={`https://restaurant-management-system-bf0d.onrender.com${food.imageUrl}`}
                                         alt={food.name}
                                         className="food-image"
                                     />

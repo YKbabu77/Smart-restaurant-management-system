@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import api from "../services/api";
+
 function Register() {
     const navigate = useNavigate();
 
@@ -35,15 +37,12 @@ function Register() {
 
     try {
 
-        const response = await axios.post(
-            "http://localhost:8080/api/auth/register",
-            {
-                fullName: formData.fullName,
-                email: formData.email,
-                phone: formData.phone,
-                password: formData.password
-            }
-        );
+        const response = await api.post("/api/auth/register", {
+            fullName: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            password: formData.password
+        });
 
         setMessage("Registration Successful!");
 

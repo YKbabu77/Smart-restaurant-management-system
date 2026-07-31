@@ -5,6 +5,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import StatCard from "../components/StatCard";
 
 import "../styles/AdminDashboard.css";
+import api from "../services/api";
 
 function AdminDashboard() {
 
@@ -30,10 +31,10 @@ function AdminDashboard() {
                 categoriesRes,
                 ordersRes
             ] = await Promise.all([
-                axios.get("http://localhost:8080/api/users"),
-                axios.get("http://localhost:8080/api/foods"),
-                axios.get("http://localhost:8080/api/categories"),
-                axios.get("http://localhost:8080/api/orders")
+                api.get("/api/users"),
+                api.get("/api/foods"),
+                api.get("/api/categories"),
+                api.get("/api/orders")
             ]);
 
             // Revenue calculation (adjust field name if needed)

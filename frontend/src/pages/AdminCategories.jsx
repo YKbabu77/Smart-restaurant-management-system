@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../components/AdminSidebar";
 import "../styles/AdminCategories.css";
+import api from "../services/api";
+
+
+
 
 function AdminCategories() {
     const [showModal, setShowModal] = useState(false);
@@ -27,9 +31,7 @@ function AdminCategories() {
 
         try {
 
-            const response = await axios.get(
-                "http://localhost:8080/api/categories"
-            );
+            const response = await api.get("/api/categories");
 
             setCategories(response.data);
 
@@ -50,9 +52,7 @@ function AdminCategories() {
 
         try {
 
-            await axios.delete(
-                `http://localhost:8080/api/categories/${id}`
-            );
+            await api.delete(`/api/categories/${id}`);
 
             loadCategories();
 
@@ -71,21 +71,15 @@ function AdminCategories() {
 
         if (isEditing) {
 
-            await axios.put(
-
-                `http://localhost:8080/api/categories/${categoryData.id}`,
-
-                categoryData
-
-            );
+            await api.put(`/api/categories/${categoryData.id}`, categoryData);
 
         }
 
         else {
 
-            await axios.post(
+            await api.post(
 
-                "http://localhost:8080/api/categories",
+                "/api/categories",
 
                 categoryData
 
@@ -171,7 +165,7 @@ function AdminCategories() {
                                 <td>
 
                                     <img
-                                        src={`http://localhost:8080${category.imageUrl}`}
+                                        src={`https://restaurant-management-system-bf0d.onrender.com${category.imageUrl}`}
                                         alt={category.name}
                                         className="category-image"
                                     />

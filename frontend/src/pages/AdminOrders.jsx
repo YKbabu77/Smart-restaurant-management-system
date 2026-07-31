@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "../components/AdminSidebar";
 import "../styles/AdminOrders.css";
+import api from "../services/api";
 
 function AdminOrders() {
 
@@ -64,9 +65,7 @@ function AdminOrders() {
 
         try {
 
-            const response = await axios.get(
-                "http://localhost:8080/api/orders"
-            );
+            const response = await api.get("/api/orders");
 
             setOrders(response.data);
 
@@ -118,11 +117,7 @@ function AdminOrders() {
 
         try {
 
-            await axios.delete(
-
-                `http://localhost:8080/api/orders/${id}`
-
-            );
+            await api.delete(`/api/orders/${id}`);
 
             alert("Order deleted.");
 
@@ -154,9 +149,9 @@ function AdminOrders() {
 
         try {
 
-            await axios.put(
+            await api.put(
 
-                `http://localhost:8080/api/orders/${selectedOrder.id}`,
+                `/api/orders/${selectedOrder.id}`,
 
                 {
 
@@ -191,8 +186,8 @@ function AdminOrders() {
 
         try {
 
-            await axios.put(
-                `http://localhost:8080/api/orders/${id}/status`,
+            await api.put(
+                `/api/orders/${id}/status`,
                 {
                     status: newStatus
                 }
@@ -265,9 +260,9 @@ function AdminOrders() {
 
             setLoadingDetails(true);
 
-            const response = await axios.get(
+            const response = await api.get(
 
-                `http://localhost:8080/api/orders/${id}/details`
+                `/api/orders/${id}/details`
 
             );
 
