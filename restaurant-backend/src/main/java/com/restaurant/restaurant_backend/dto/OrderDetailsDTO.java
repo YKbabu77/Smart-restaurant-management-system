@@ -2,27 +2,23 @@ package com.restaurant.restaurant_backend.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class OrderDetailsDTO {
 
     private Long id;
-
     private Long userId;
-
     private String customerName;
-
     private LocalDateTime orderDate;
-
     private BigDecimal totalAmount;
-
     private String status;
-
     private String paymentMethod;
-
     private String paymentStatus;
 
-    private String deliveryAddress;
+    private LocalTime pickupTime;
+    private LocalTime estimatedReadyTime;
+    private String specialInstructions;
 
     private List<OrderItemDTO> items;
 
@@ -38,7 +34,9 @@ public class OrderDetailsDTO {
             String status,
             String paymentMethod,
             String paymentStatus,
-            String deliveryAddress,
+            LocalTime pickupTime,
+            LocalTime estimatedReadyTime,
+            String specialInstructions,
             List<OrderItemDTO> items) {
 
         this.id = id;
@@ -49,90 +47,46 @@ public class OrderDetailsDTO {
         this.status = status;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
-        this.deliveryAddress = deliveryAddress;
+        this.pickupTime = pickupTime;
+        this.estimatedReadyTime = estimatedReadyTime;
+        this.specialInstructions = specialInstructions;
         this.items = items;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public Long getUserId() {
-        return userId;
-    }
+    public String getCustomerName() { return customerName; }
+    public void setCustomerName(String customerName) { this.customerName = customerName; }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    public LocalDateTime getOrderDate() { return orderDate; }
+    public void setOrderDate(LocalDateTime orderDate) { this.orderDate = orderDate; }
 
-    public String getCustomerName() {
-        return customerName;
-    }
+    public BigDecimal getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
-    }
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
+    public String getPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
+    public LocalTime getPickupTime() { return pickupTime; }
+    public void setPickupTime(LocalTime pickupTime) { this.pickupTime = pickupTime; }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+    public LocalTime getEstimatedReadyTime() { return estimatedReadyTime; }
+    public void setEstimatedReadyTime(LocalTime estimatedReadyTime) { this.estimatedReadyTime = estimatedReadyTime; }
 
-    public String getStatus() {
-        return status;
-    }
+    public String getSpecialInstructions() { return specialInstructions; }
+    public void setSpecialInstructions(String specialInstructions) { this.specialInstructions = specialInstructions; }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public List<OrderItemDTO> getItems() { return items; }
+    public void setItems(List<OrderItemDTO> items) { this.items = items; }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
-    public List<OrderItemDTO> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrderItemDTO> items) {
-        this.items = items;
-    }
-
-    // Generate Getters & Setters
-    
 }

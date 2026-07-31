@@ -2,6 +2,7 @@ package com.restaurant.restaurant_backend.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,6 +22,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "orders")
 public class Order {
+
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
@@ -49,9 +51,14 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_status")
     private PaymentStatus paymentStatus = PaymentStatus.PENDING;
+    @Column(name = "pickup_time")
+    private LocalTime pickupTime;
 
-    @Column(name = "delivery_address")
-    private String deliveryAddress;
+    @Column(name = "estimated_ready_time")
+    private LocalTime estimatedReadyTime;
+
+    @Column(name = "special_instructions")
+    private String specialInstructions;
 
     public Order() {
     }
@@ -112,19 +119,36 @@ public class Order {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getDeliveryAddress() {
-        return deliveryAddress;
+    public LocalTime getPickupTime() {
+        return pickupTime;
     }
 
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
+    public void setPickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
     }
+
+    public LocalTime getEstimatedReadyTime() {
+        return estimatedReadyTime;
+    }
+
+    public void setEstimatedReadyTime(LocalTime estimatedReadyTime) {
+        this.estimatedReadyTime = estimatedReadyTime;
+    }
+
+    public String getSpecialInstructions() {
+        return specialInstructions;
+    }
+
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
+    }
+
     public List<OrderItem> getOrderItems() {
-    return orderItems;
+        return orderItems;
     }
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
-    
+
 }

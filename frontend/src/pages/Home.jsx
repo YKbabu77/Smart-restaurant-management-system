@@ -22,19 +22,18 @@ function Home() {
         <div className="hero-content">
 
           <h1>
-            Delicious Food Delivered Fresh
+            Fresh Food, Ready When You Arrive
           </h1>
 
           <p>
-            Enjoy mouth-watering dishes prepared by our expert chefs using
-            fresh ingredients and delivered straight to your doorstep.
+           Order online, choose your pickup time, and skip the waiting line.
           </p>
 
           <button className="hero-btn"   
            onClick={() => navigate("/menu")}
            //onClick={() => showSuccess("Welcome to Food Paradise!")}
            >
-             Order Now
+             Order Food
           </button>
 
         </div>

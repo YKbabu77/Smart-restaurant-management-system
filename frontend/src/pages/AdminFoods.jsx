@@ -427,7 +427,7 @@ function AdminFoods() {
                                 <td>{food.isAvailable ? "✅ Yes" : "❌ No"}</td>
                                 <td>⭐ {food.rating}</td>
 
-                                <td>
+                                <td className="actions">
                                     <button className="edit-btn" onClick={() => openEditForm(food)}>
                                         Edit
                                     </button>

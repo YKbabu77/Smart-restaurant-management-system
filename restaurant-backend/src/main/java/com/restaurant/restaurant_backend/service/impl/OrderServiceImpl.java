@@ -1,6 +1,7 @@
 package com.restaurant.restaurant_backend.service.impl;
 
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import com.restaurant.restaurant_backend.dto.OrderRequest;
 import com.restaurant.restaurant_backend.entity.Cart;
 import com.restaurant.restaurant_backend.entity.Order;
 import com.restaurant.restaurant_backend.entity.OrderItem;
+import com.restaurant.restaurant_backend.entity.OrderStatus;
 import com.restaurant.restaurant_backend.entity.User;
 import com.restaurant.restaurant_backend.exception.ResourceNotFoundException;
 import com.restaurant.restaurant_backend.mapper.OrderMapper;
@@ -26,6 +28,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -41,82 +44,107 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order placeOrder(OrderRequest request) {
-    
-    System.out.println(">>> placeOrder() method called <<<");
-    
-    User user = userRepository.findById(request.getUserId())
-            .orElseThrow(() -> new RuntimeException("User not found"));
 
-    System.out.println("User Found: " + user.getId());
+        System.out.println(">>> placeOrder() method called <<<");
 
-    List<Cart> cartItems = cartRepository.findByUserId(request.getUserId());
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    System.out.println("Cart Size: " + cartItems.size());
+        System.out.println("User Found: " + user.getId());
 
-    if (cartItems.isEmpty()) {
-        throw new RuntimeException("Cart is empty");
-    }
+        List<Cart> cartItems = cartRepository.findByUserId(request.getUserId());
+        int totalQuantity = cartItems.stream()
+                .mapToInt(Cart::getQuantity)
+                .sum();
 
-    BigDecimal total = BigDecimal.ZERO;
+        System.out.println("Cart Size: " + cartItems.size());
 
-    for (Cart cart : cartItems) {
-        System.out.println("Food: " + cart.getFood().getName());
+        if (cartItems.isEmpty()) {
+            throw new RuntimeException("Cart is empty");
+        }
 
-        total = total.add(
-                cart.getPrice().multiply(
-                        BigDecimal.valueOf(cart.getQuantity())
-                )
-        );
-    }
+        BigDecimal total = BigDecimal.ZERO;
 
-    System.out.println("Total: " + total);
+        for (Cart cart : cartItems) {
+            System.out.println("Food: " + cart.getFood().getName());
 
-    Order order = new Order();
+            total = total.add(
+                    cart.getPrice().multiply(
+                            BigDecimal.valueOf(cart.getQuantity())
+                    )
+            );
+        }
 
-    order.setUser(user);
-    order.setTotalAmount(total);
-    order.setDeliveryAddress(request.getDeliveryAddress());
-    order.setPaymentMethod(request.getPaymentMethod());
+        System.out.println("Total: " + total);
+        LocalTime estimatedReadyTime;
 
-    order = orderRepository.save(order);
+        if (totalQuantity <= 2) {
 
-    System.out.println("Order Saved: " + order.getId());
+            estimatedReadyTime = LocalTime.now().plusMinutes(15);
 
-    for (Cart cart : cartItems) {
+        } else if (totalQuantity <= 5) {
 
-        System.out.println("Saving Order Item...");
+            estimatedReadyTime = LocalTime.now().plusMinutes(25);
 
-        OrderItem item = new OrderItem();
+        } else {
 
-        item.setOrder(order);
-        item.setFood(cart.getFood());
-        item.setQuantity(cart.getQuantity());
-        item.setPrice(cart.getPrice());
+            estimatedReadyTime = LocalTime.now().plusMinutes(40);
 
-        orderItemRepository.save(item);
-    }
+        }
+        if (request.getPickupTime().isBefore(estimatedReadyTime)) {
+            throw new RuntimeException(
+                    "Please select a pickup time after "
+                    + estimatedReadyTime
+            );
+        }
+        Order order = new Order();
 
-    System.out.println("Deleting Cart...");
+        order.setUser(user);
+        order.setTotalAmount(total);
+        order.setPickupTime(request.getPickupTime());
 
-    cartRepository.deleteByUserId(request.getUserId());
+        order.setSpecialInstructions(request.getSpecialInstructions());
+        order.setPaymentMethod(request.getPaymentMethod());
+        order.setEstimatedReadyTime(estimatedReadyTime);
+        order = orderRepository.save(order);
 
-    System.out.println("===== PLACE ORDER END =====");
+        System.out.println("Order Saved: " + order.getId());
 
-    return order;
+        for (Cart cart : cartItems) {
+
+            System.out.println("Saving Order Item...");
+
+            OrderItem item = new OrderItem();
+
+            item.setOrder(order);
+            item.setFood(cart.getFood());
+            item.setQuantity(cart.getQuantity());
+            item.setPrice(cart.getPrice());
+
+            orderItemRepository.save(item);
+        }
+
+        System.out.println("Deleting Cart...");
+
+        cartRepository.deleteByUserId(request.getUserId());
+
+        System.out.println("===== PLACE ORDER END =====");
+
+        return order;
     }
 
     @Override
     public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll()
-            .stream()
-            .map(order -> OrderMapper.toDTO(order))
-            .toList();
+                .stream()
+                .map(order -> OrderMapper.toDTO(order))
+                .toList();
     }
 
     @Override
     public Optional<OrderDTO> getOrderById(Long id) {
         Order order = orderRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
 
         return Optional.of(OrderMapper.toDTO(order));
 
@@ -125,9 +153,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDTO> getOrdersByUser(Long userId) {
         return orderRepository.findByUserIdOrderByOrderDateDesc(userId)
-            .stream()
-            .map(OrderMapper::toDTO)
-            .toList();
+                .stream()
+                .map(OrderMapper::toDTO)
+                .toList();
     }
 
     @Override
@@ -141,15 +169,32 @@ public class OrderServiceImpl implements OrderService {
         existingOrder.setStatus(order.getStatus());
         existingOrder.setPaymentMethod(order.getPaymentMethod());
         existingOrder.setPaymentStatus(order.getPaymentStatus());
-        existingOrder.setDeliveryAddress(order.getDeliveryAddress());
+        existingOrder.setPickupTime(order.getPickupTime());
+        existingOrder.setEstimatedReadyTime(order.getEstimatedReadyTime());
+        existingOrder.setSpecialInstructions(order.getSpecialInstructions());
 
         return orderRepository.save(existingOrder);
+    }
+
+    @Override
+    public OrderDTO updateOrderStatus(Long id, String status) {
+
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+
+        order.setStatus(OrderStatus.valueOf(status));
+
+        orderRepository.save(order);
+
+        return OrderMapper.toDTO(order);
+
     }
 
     @Override
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
     }
+
     @Override
     public Optional<OrderDetailsDTO> getOrderDetails(Long id) {
 

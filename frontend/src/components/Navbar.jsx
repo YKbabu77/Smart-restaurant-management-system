@@ -56,7 +56,7 @@ function Navbar() {
 
                 <NavLink to="/categories" onClick={() => setMenuOpen(false)}>Categories</NavLink>
 
-                <NavLink to="/orders" onClick={() => setMenuOpen(false)}>Orders</NavLink>
+                <NavLink to="/orders" onClick={() => setMenuOpen(false)}>Pickup Orders</NavLink>
 
                 <NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink>
 
@@ -120,7 +120,7 @@ function Navbar() {
                     }}
                 >
 
-                    📦 My Orders
+                    📦 My Pickup Orders
 
                 </button>
 

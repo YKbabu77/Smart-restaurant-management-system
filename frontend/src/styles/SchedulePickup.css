@@ -1,0 +1,329 @@
+.pickup-hero {
+
+    width: 92%;
+    height: 140px;
+    padding: 0 50px;
+    margin: 20px auto;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(rgba(0, 0, 0, .55),
+            rgba(0, 0, 0, .55)),
+        url("../assets/hero-food.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+
+    color: white;
+
+    overflow: hidden;
+}
+
+.hero-content h1 {
+
+    font-size: 42px;
+    margin: 0;
+    line-height: 1.2;
+    margin-bottom: 10px;
+
+}
+
+.hero-content span {
+
+    color: #ff8a00;
+
+}
+
+.hero-content p {
+
+    font-size: 18px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: #f5f5f5;
+
+}
+
+.pickup-container {
+
+    width: 92%;
+
+    margin: 15px auto;
+
+    display: grid;
+
+    grid-template-columns: 65% 35%;
+
+    gap: 20px;
+
+}
+
+.pickup-left,
+.pickup-right {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+}
+
+.pickup-right {
+
+    position: sticky;
+
+    top: 100px;
+
+    height: fit-content;
+
+}
+
+.section-title {
+    font-size: 30px;
+    margin-bottom: 2px;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    color: #666;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.ready-card {
+
+    background: #ecfff2;
+    border: 1px solid #b6f0c5;
+
+    border-radius: 15px;
+
+    padding: 14px 18px;
+    margin: 14px 0;
+    margin-bottom: 25px;
+}
+
+.ready-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2d7d46;
+}
+
+.ready-card h1 {
+
+    color: #1f6d35;
+
+    margin: 6px 0;
+    font-size: 34px;
+}
+.ready-card p{
+    margin:0;
+    font-size:14px;
+}
+
+.payment-options {
+
+    display: flex;
+
+    gap: 15px;
+}
+
+.payment-options button {
+
+    flex: 1;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    border: 2px solid #ddd;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.payment-options .active {
+
+    background: #ff8a00;
+
+    color: white;
+
+    border-color: #ff8a00;
+}
+
+.confirm-btn {
+
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    background: #ff6b00;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: .3s;
+    background: linear-gradient(90deg,
+            #ff6b00,
+            #ff8a00);
+}
+
+.confirm-btn:hover {
+
+    background: #e55d00;
+}
+
+.summary-items {
+
+    margin-top: 25px;
+
+}
+
+.summary-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+
+}
+
+.summary-item img {
+
+    width: 65px;
+
+    height: 65px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+}
+
+.summary-info {
+
+    flex: 1;
+
+}
+
+.summary-info h4 {
+
+    margin: 0;
+
+    font-size: 17px;
+
+}
+
+.summary-info p {
+
+    color: #777;
+
+    margin-top: 4px;
+
+}
+
+.summary-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 15px;
+
+    font-size: 18px;
+
+}
+
+.pickup-features {
+
+    width: 92%;
+
+    margin: 18px auto 30px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+}
+
+.feature-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+
+}
+
+.feature-card h3 {
+
+    color: #ff6b00;
+
+    margin-bottom: 10px;
+
+}
+.card-header{
+    margin-bottom:16px;
+}
+
+.card-header h2{
+    margin:0;
+    font-size:30px;
+}
+
+.card-header span{
+    display:block;
+    margin-top:4px;
+    color:#777;
+    font-size:15px;
+}

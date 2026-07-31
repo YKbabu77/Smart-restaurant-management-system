@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restaurant.restaurant_backend.dto.OrderDTO;
 import com.restaurant.restaurant_backend.dto.OrderDetailsDTO;
 import com.restaurant.restaurant_backend.dto.OrderRequest;
+import com.restaurant.restaurant_backend.dto.OrderStatusRequest;
 import com.restaurant.restaurant_backend.entity.Order;
 import com.restaurant.restaurant_backend.service.OrderService;
 
@@ -64,6 +65,15 @@ public class OrderController {
         return ResponseEntity.ok(orderService.updateOrder(id, order));
     }
 
+    @PutMapping("/{id}/status")
+    public OrderDTO updateOrderStatus(
+            @PathVariable Long id,
+            @RequestBody OrderStatusRequest request) {
+
+        return orderService.updateOrderStatus(id, request.getStatus());
+
+    }
+
     // Delete Order
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
@@ -82,4 +92,5 @@ public class OrderController {
                 .orElse(ResponseEntity.notFound().build());
 
     }
+
 }

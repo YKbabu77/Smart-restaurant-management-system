@@ -10,54 +10,42 @@ import { useNavigate } from "react-router-dom";
 function Orders() {
     const navigate = useNavigate();
     const [selectedOrderItems, setSelectedOrderItems] = useState([]);
+    const [selectedOrder, setSelectedOrder] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const getStatusLabel = (status) => {
 
-    switch (status) {
+        switch (status) {
 
-        case "PENDING":
-            return "Pending";
+            case "PENDING":
+                return "Pending";
 
-        case "CONFIRMED":
-            return "Confirmed";
+            case "CONFIRMED":
+                return "Confirmed";
 
-        case "DELIVERED":
-            return "Delivered";
+            case "PREPARING":
+                return "Preparing";
 
-        case "CANCELLED":
-            return "Cancelled";
+            case "READY_FOR_PICKUP":
+                return "Ready For Pickup";
 
-        default:
-            return status;
-    }
+            case "COMPLETED":
+                return "Completed";
+
+            case "CANCELLED":
+                return "Cancelled";
+
+            default:
+                return status;
+        }
 
     };
     useEffect(() => {
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user) {
-
-        navigate("/login");
-
-        return;
-
-    }
-
-    fetchOrders();
-
-    }, []);
-    const fetchOrders = async () => {
-
-    try {
-
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (!user) {
-
-            showError("Please login first.");
 
             navigate("/login");
 
@@ -65,86 +53,108 @@ function Orders() {
 
         }
 
-        const response = await api.get(`/api/orders/user/${user.id}`);
+        fetchOrders();
 
-        setOrders(response.data);
+    }, []);
+    const fetchOrders = async () => {
 
-    } catch (error) {
+        try {
 
-        console.error(error);
+            const user = JSON.parse(localStorage.getItem("user"));
 
-        showError("Unable to load orders.");
+            if (!user) {
 
-    } finally {
+                showError("Please login first.");
 
-        setLoading(false);
+                navigate("/login");
 
-    }
+                return;
+
+            }
+
+            const response = await api.get(`/api/orders/user/${user.id}`);
+
+            setOrders(response.data);
+
+        } catch (error) {
+
+            console.error(error);
+
+            showError("Unable to load orders.");
+
+        } finally {
+
+            setLoading(false);
+
+        }
 
     };
     if (loading) {
-    return <Loader />;
+        return <Loader />;
     }
+
     const viewDetails = async (orderId) => {
 
-    try {
+        try {
+            const order = orders.find(o => o.id === orderId);
+            setSelectedOrder(order);
 
-        const response = await api.get(`/api/order-items/order/${orderId}`);
+            const response = await api.get(`/api/order-items/order/${orderId}`);
 
-        setSelectedOrderItems(response.data);
+            setSelectedOrderItems(response.data);
 
-        setShowModal(true);
+            setShowModal(true);
 
-    } catch (error) {
+        } catch (error) {
 
-        console.error(error);
+            console.error(error);
 
-        showError("Unable to load order details.");
+            showError("Unable to load order details.");
 
-    }
+        }
 
     };
     if (!loading && orders.length === 0) {
 
-    return (
+        return (
 
-        <div className="orders-page">
+            <div className="orders-page">
 
-            <Helmet>
-                <title>Food Paradise | My Orders</title>
-            </Helmet>
+                <Helmet>
+                    <title>Food Paradise | My  PickupOrders</title>
+                </Helmet>
 
-            <div className="empty-orders">
+                <div className="empty-orders">
 
-                <h2>You haven't placed any orders yet.</h2>
+                    <h2>You haven't placed any pickup orders yet.</h2>
 
-                <p>
-                    Your order history will appear here after your first order.
-                </p>
+                    <p>
+                        Your pickup order history will appear here after your first order.
+                    </p>
 
-                <button
-                    className="order-btn"
-                    onClick={() => navigate("/menu")}
-                >
-                    Order Now
-                </button>
+                    <button
+                        className="order-btn"
+                        onClick={() => navigate("/menu")}
+                    >
+                        Order Now
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
-
-    );
+        );
 
     }
     return (
 
         <div className="orders-page">
             <Helmet>
-    <title>Food Paradise | My Orders</title>
-</Helmet>
+                <title>Food Paradise | My Pickup Orders</title>
+            </Helmet>
 
             <h1 className="orders-title">
-                My Orders
+                My Pickup Orders
             </h1>
 
             <div className="orders-container">
@@ -165,49 +175,65 @@ function Orders() {
                             </div>
 
                             <div className={`order-status ${order.status.toLowerCase()}`}>
-                                     {getStatusLabel(order.status)}
+                                {getStatusLabel(order.status)}
                             </div>
 
                         </div>
 
-                        <p className="order-date">
+                        <div className="order-info-grid">
 
-                            Date : {
-                                new Date(order.orderDate).toLocaleDateString("en-IN", {
-                                    day: "2-digit",
-                                    month: "short",
-                                    year: "numeric"
-                                })
-                            }
+                            <div className="info-box">
 
-                        </p>
+                                <span>📅 Order Date</span>
 
-                        {/* <ul className="order-items">
+                                <strong>
+                                    {new Date(order.orderDate).toLocaleDateString("en-IN", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric"
+                                    })}
+                                </strong>
 
-                            {order.items.map((item,index)=>(
+                            </div>
 
-                                <li key={index}>
+                            <div className="info-box">
 
-                                    {item}
+                                <span>🕒 Pickup Time</span>
 
-                                </li>
+                                <strong>{order.pickupTime}</strong>
 
-                            ))}
+                            </div>
 
-                        </ul> */}
+                            <div className="info-box">
 
-                        <p className="order-total">
+                                <span>🍳 Ready Time</span>
 
-                            Total : ₹{order.totalAmount}
+                                <strong>{order.estimatedReadyTime}</strong>
 
-                        </p>
+                            </div>
 
-                        <button className="order-btn"
-                        onClick={() => viewDetails(order.id)}>
+                        </div>
 
-                            View Details
+                        <div className="order-footer">
 
-                        </button>
+                            <div className="order-total">
+
+                                <span>Total Amount</span>
+
+                                <h2>
+                                    ₹{order.totalAmount}
+                                </h2>
+
+                            </div>
+
+                            <button
+                                className="order-btn"
+                                onClick={() => viewDetails(order.id)}
+                            >
+                                View Details
+                            </button>
+
+                        </div>
 
                     </div>
 
@@ -216,49 +242,144 @@ function Orders() {
             </div>
             {showModal && (
 
-    <div className="modal-overlay">
+                <div className="modal-overlay">
 
-        <div className="modal">
+                    <div className="modal">
+                        <div className="modal-header">
 
-            <h2>Order Details</h2>
+                            <h2>
+                                🍽 Order Details
+                            </h2>
 
-            {selectedOrderItems.map(item => (
+                            <button
+                                className="modal-close"
+                                onClick={() => setShowModal(false)}
+                            >
+                                ✕
+                            </button>
 
-                <div key={item.id} className="modal-item">
+                        </div>
+                        <div className="modal-section">
 
-                    <img
-                        src={item.foodImageUrl}
-                        alt={item.foodName}
-                        width="80"
-                    />
+                            <h3>
+                                Ordered Items
+                            </h3>
 
-                    <div>
+                            {selectedOrderItems.map(item => (
 
-                        <h3>{item.foodName}</h3>
+                                <div
+                                    key={item.id}
+                                    className="order-food-card"
+                                >
 
-                        <p>Price : ₹{item.price}</p>
+                                    <img
+                                        src={item.foodImageUrl}
+                                        alt={item.foodName}
+                                    />
 
-                        <p>Quantity : {item.quantity}</p>
+                                    <div className="food-details">
 
-                        <p>Subtotal : ₹{item.price * item.quantity}</p>
+                                        <h4>
+                                            {item.foodName}
+                                        </h4>
 
+                                        <p>
+                                            Quantity : {item.quantity}
+                                        </p>
+
+                                    </div>
+
+                                    <div className="food-price">
+
+                                        <h4>
+                                            ₹{item.price}
+                                        </h4>
+
+                                        <p>
+                                            ₹{item.price * item.quantity}
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            ))}
+
+                        </div>
+                        <div className="modal-section">
+
+                            <h3>
+                                Pickup Information
+                            </h3>
+
+                            <div className="pickup-grid">
+
+                                <div className="pickup-card">
+
+                                    <span>🕒 Pickup Time</span>
+
+                                    <h4>{selectedOrder?.pickupTime}</h4>
+
+                                </div>
+
+                                <div className="pickup-card">
+
+                                    <span>🍳 Ready Time</span>
+
+                                    <h4>{selectedOrder?.estimatedReadyTime}</h4>
+
+                                </div>
+
+                                <div className="pickup-card">
+
+                                    <span>💳 Payment</span>
+
+                                    <h4>{selectedOrder?.paymentMethod}</h4>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div className="modal-section">
+
+                            <h3>
+                                Instructions
+                            </h3>
+
+                            <div className="instructions-box">
+
+                                {selectedOrder?.specialInstructions ||
+                                    "No special instructions"}
+
+                            </div>
+
+                        </div>
+                        <div className="modal-footer">
+
+                            <div>
+
+                                <span>Total Amount</span>
+
+                                <h2>
+                                    ₹{selectedOrder?.totalAmount}
+                                </h2>
+
+                            </div>
+
+                            <button
+                                className="order-btn"
+                                onClick={() => setShowModal(false)}
+                            >
+                                Close
+                            </button>
+
+                        </div>
                     </div>
 
                 </div>
 
-            ))}
-
-            <button className="order-btn"
-                onClick={() => setShowModal(false)}
-            >
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
-    )}
+            )}
 
         </div>
 

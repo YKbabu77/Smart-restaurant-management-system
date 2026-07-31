@@ -8,7 +8,7 @@ import { showError, showSuccess } from "../utils/toast";
 import { useLocation } from "react-router-dom";
 
 
-function Menu(){
+function Menu() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const urlCategory = queryParams.get("category");
@@ -18,84 +18,84 @@ function Menu(){
     const [selectedCategory, setSelectedCategory] = useState("All");
     useEffect(() => {
 
-      fetchFoods();
+        fetchFoods();
 
     }, []);
     const fetchFoods = async () => {
 
-    try{
+        try {
 
-        const response = await api.get("/api/foods");
+            const response = await api.get("/api/foods");
 
-        setFoods(response.data);
+            setFoods(response.data);
 
-    }
-    catch(error){
+        }
+        catch (error) {
 
-        console.error(error);
+            console.error(error);
 
-        showError("Unable to load Menu.");
+            showError("Unable to load Menu.");
 
-    }
-    finally{
+        }
+        finally {
 
-        setLoading(false);
+            setLoading(false);
 
-    }
+        }
 
-   };
+    };
     useEffect(() => {
-    if (urlCategory) {
-        setSelectedCategory(urlCategory);
-    } else {
-        setSelectedCategory("All");
-    }
-}, [urlCategory]);
-     if (loading) {
+        if (urlCategory) {
+            setSelectedCategory(urlCategory);
+        } else {
+            setSelectedCategory("All");
+        }
+    }, [urlCategory]);
+    if (loading) {
         return <Loader />;
     }
     const filteredFoods = foods.filter((food) => {
 
-    const matchesSearch =
-        food.name.toLowerCase().includes(search.toLowerCase());
+        const matchesSearch =
+            food.name.toLowerCase().includes(search.toLowerCase());
 
-    const matchesCategory =
-        selectedCategory === "All" ||
-        food.categoryName === selectedCategory;
+        const matchesCategory =
+            selectedCategory === "All" ||
+            food.categoryName === selectedCategory;
 
-    return matchesSearch && matchesCategory;
-});
+        return matchesSearch && matchesCategory;
+    });
     const addToCart = async (food) => {
-    try {
+        try {
 
-        const user = JSON.parse(localStorage.getItem("user"));
+            const user = JSON.parse(localStorage.getItem("user"));
 
-        if (!user) {
-             showError("Please login first.");
-            return;
+            if (!user) {
+                showError("Please login first.");
+                return;
+            }
+
+            const cartRequest = {
+                userId: user.id,
+                foodId: food.id,
+                quantity: 1
+            };
+
+            await api.post("/api/cart", cartRequest);
+
+            showSuccess(`${food.name} added to cart`);
+
+        } catch (error) {
+
+            console.error(error);
+            showError("Unable to add item to cart.");
         }
-
-        const cartRequest = {
-        userId: user.id,
-        foodId: food.id,
-        quantity: 1
     };
+    return (
 
-        await api.post("/api/cart", cartRequest);
 
-        showSuccess(`${food.name} added to cart`);
-
-    } catch (error) {
-
-        console.error(error);
-        showError("Unable to add item to cart.");
-    }
-};
-return(
-  
-
-<div className="menu-page">
-  <Helmet>
+        <div className="menu-page">
+            <Helmet>
                 <title>Food Paradise | Menu</title>
                 <meta
                     name="description"
@@ -103,104 +103,120 @@ return(
                 />
             </Helmet>
 
-<h1 className="menu-title">
-Our Menu
-</h1>
+            <h1 className="menu-title">
+                Our Menu
+            </h1>
 
-<center>
+            <center>
 
-<input
-className="search-box"
-placeholder="Search Food..."
-value={search}
-onChange={(e) => setSearch(e.target.value)}
-/>
+                <input
+                    className="search-box"
+                    placeholder="Search Food..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
 
-</center>
+            </center>
 
-<div className="filter">
+            <div className="filter">
 
-<center>
+                <center>
+                    
 
-<button onClick={() => setSelectedCategory("All")}>
-    All
-</button>
+                    <button onClick={() => setSelectedCategory("All")}>
+                        All
+                    </button>
+                    <button
+                        className={selectedCategory === "Biryani" ? "active-filter" : ""}
+                        onClick={() => setSelectedCategory("Biryani")}>
+                        Biryani 
+                    </button>
 
-<button
-    className={selectedCategory === "Pizza" ? "active-filter" : ""}
-    onClick={() => setSelectedCategory("Pizza")}
->
-    Pizza
-</button>
-<button 
-    className={selectedCategory === "Burgers" ? "active-filter" : ""}
-    onClick={() => setSelectedCategory("Burgers")}
->
-    Burgers
-</button>
+                    <button
+                        className={selectedCategory === "Pizza" ? "active-filter" : ""}
+                        onClick={() => setSelectedCategory("Pizza")}
+                    >
+                        Pizza
+                    </button>
+                    <button
+                        className={selectedCategory === "Burgers" ? "active-filter" : ""}
+                        onClick={() => setSelectedCategory("Burgers")}
+                    >
+                        Burgers
+                    </button>
 
-<button 
-    className={selectedCategory === "Chicken" ? "active-filter" : ""}
-    onClick={() => setSelectedCategory("Chicken")}>
-    Chicken
-</button>
+                    <button
+                        className={selectedCategory === "Chicken" ? "active-filter" : ""}
+                        onClick={() => setSelectedCategory("Chicken")}>
+                        Fried Chicken
+                    </button>
+                    <button
+                        className={selectedCategory === "Soups" ? "active-filter" : ""}
+                        onClick={() => setSelectedCategory("Soups")}>
+                        Soups
+                    </button>
 
-<button 
-    className={selectedCategory === "Drinks" ? "active-filter" : ""}
-    onClick={() => setSelectedCategory("Drinks")}>
-    Drinks
-</button>
+                    <button
+                        className={selectedCategory === "Drinks" ? "active-filter" : ""}
+                        onClick={() => setSelectedCategory("Drinks")}>
+                        Drinks
+                    </button>
+                    <button
+                        className={selectedCategory === "Desserts" ? "active-filter" : ""}
+                        onClick={() => setSelectedCategory("Desserts")}>
+                        Desserts
+                    </button>
 
-</center>
+                </center>
 
-</div>
+            </div>
 
-<div className="food-grid">
+            <div className="food-grid">
 
-{
-filteredFoods.map(food=>(
+                {
+                    filteredFoods.map(food => (
 
-<div
-className="food-card"
-key={food.id}
->
+                        <div
+                            className="food-card"
+                            key={food.id}
+                        >
 
-<img src={food.imageUrl} alt={food.name}/>
+                            <img src={food.imageUrl} alt={food.name} />
 
-<div className="food-details">
+                            <div className="food-details">
 
-<h3>{food.name}</h3>
-<p className="food-description">
-    {food.description}
-</p>
+                                <h3>{food.name}</h3>
+                                <p className="food-description">
+                                    {food.description}
+                                </p>
 
-<p className="food-price">
+                                <p className="food-price">
 
-₹{food.price}
+                                    ₹{food.price}
 
-</p>
+                                </p>
 
-<button 
-    className="food-btn" 
-    onClick={() => showSuccess(`${food.name} added to cart!`)}
-    onClick={() => addToCart(food)}>
+                                <button
+                                    className="food-btn"
+                                    onClick={() => showSuccess(`${food.name} added to cart!`)}
+                                    onClick={() => addToCart(food)}>
 
-Add To Cart
+                                    Add To Cart
 
-</button>
+                                </button>
 
-</div>
+                            </div>
 
-</div>
+                        </div>
 
-))
-}
+                    ))
+                }
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-);
+    );
 
 }
 

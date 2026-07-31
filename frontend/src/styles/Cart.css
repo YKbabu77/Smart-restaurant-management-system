@@ -99,12 +99,27 @@
     cursor:pointer;
     font-size:16px;
 }
+.checkout-btn {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background-color: #d35400;
+}
 
 .continue-btn{
     background:#6c757d;
 }
 
-.checkout-btn{
+.schedule-btn{
     background:#ff6b35;
 }
 @media(max-width:768px){

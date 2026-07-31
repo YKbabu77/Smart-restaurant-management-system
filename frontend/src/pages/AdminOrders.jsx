@@ -24,13 +24,32 @@ function AdminOrders() {
 
     const [loadingDetails, setLoadingDetails] = useState(false);
     const totalOrders = orders.length;
+    const formatTime = (time) => {
+
+        if (!time) return "--";
+
+        const [hour, minute] = time.split(":");
+
+        const h = Number(hour);
+
+        const period = h >= 12 ? "PM" : "AM";
+
+        const displayHour = h % 12 || 12;
+
+        return `${displayHour}:${minute} ${period}`;
+
+    };
 
     const pendingOrders = orders.filter(
         order => order.status === "PENDING"
     ).length;
 
-    const deliveredOrders = orders.filter(
-        order => order.status === "DELIVERED"
+    const preparingOrders = orders.filter(
+        order => order.status === "PREPARING"
+    ).length;
+
+    const readyOrders = orders.filter(
+        order => order.status === "READY_FOR_PICKUP"
     ).length;
 
     const totalRevenue = orders.reduce(
@@ -168,6 +187,78 @@ function AdminOrders() {
         }
 
     };
+    const updateOrderStatus = async (id, newStatus) => {
+
+        try {
+
+            await axios.put(
+                `http://localhost:8080/api/orders/${id}/status`,
+                {
+                    status: newStatus
+                }
+            );
+
+            loadOrders();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert("Unable to update order status.");
+
+        }
+
+    };
+    const formatInstructions = (text) => {
+
+        if (!text) return "None";
+
+        return text;
+
+    };
+    const getNextStatus = (status) => {
+
+        const steps = {
+
+            PENDING: {
+
+                label: "✅ Confirm",
+                value: "CONFIRMED",
+                className: "confirm-btn"
+
+            },
+
+            CONFIRMED: {
+
+                label: "👨‍🍳 Preparing",
+                value: "PREPARING",
+                className: "prepare-btn"
+
+            },
+
+            PREPARING: {
+
+                label: "🍽 Ready",
+                value: "READY_FOR_PICKUP",
+                className: "ready-btn"
+
+            },
+
+            READY_FOR_PICKUP: {
+
+                label: "✔ Complete",
+                value: "COMPLETED",
+                className: "complete-btn"
+
+            }
+
+        };
+
+        return steps[status] || null;
+
+    };
     const viewOrderDetails = async (id) => {
 
         try {
@@ -228,9 +319,14 @@ function AdminOrders() {
                         <h2>{pendingOrders}</h2>
                     </div>
 
-                    <div className="order-card delivered">
-                        <h3>Delivered</h3>
-                        <h2>{deliveredOrders}</h2>
+                    <div className="order-card preparing">
+                        <h3>Preparing</h3>
+                        <h2>{preparingOrders}</h2>
+                    </div>
+
+                    <div className="order-card ready">
+                        <h3>Ready</h3>
+                        <h2>{readyOrders}</h2>
                     </div>
 
                     <div className="order-card revenue">
@@ -257,9 +353,21 @@ function AdminOrders() {
                     >
                         <option value="ALL">All Orders</option>
                         <option value="PENDING">Pending</option>
-                        <option value="PREPARING">Preparing</option>
-                        <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
-                        <option value="DELIVERED">Delivered</option>
+                        <option value="CONFIRMED">
+                            Confirmed
+                        </option>
+
+                        <option value="PREPARING">
+                            Preparing
+                        </option>
+
+                        <option value="READY_FOR_PICKUP">
+                            Ready For Pickup
+                        </option>
+
+                        <option value="COMPLETED">
+                            Completed
+                        </option>
                         <option value="CANCELLED">Cancelled</option>
                     </select>
 
@@ -275,7 +383,8 @@ function AdminOrders() {
 
                             <th>Order ID</th>
                             <th>Customer</th>
-                            <th>Date</th>
+                            <th>Pickup Time</th>
+                            <th>Ready Time</th>
                             <th>Total</th>
                             <th>Payment</th>
                             <th>Status</th>
@@ -296,7 +405,14 @@ function AdminOrders() {
                                 <td>{order.customerName}</td>
 
                                 <td>
-                                    {new Date(order.orderDate).toLocaleDateString()}
+
+                                    {formatTime(order.pickupTime)}
+
+                                </td>
+
+                                <td>
+
+                                    {formatTime(order.estimatedReadyTime)}
                                 </td>
 
                                 <td>₹{order.totalAmount}</td>
@@ -313,7 +429,8 @@ function AdminOrders() {
 
                                 </td>
 
-                                <td>
+                                <td className="action-buttons">
+
                                     <button
                                         className="view-btn"
                                         onClick={() => viewOrderDetails(order.id)}
@@ -321,12 +438,21 @@ function AdminOrders() {
                                         View
                                     </button>
 
-                                    <button
-                                        className="edit-btn"
-                                        onClick={() => openEditModal(order)}
-                                    >
-                                        Edit
-                                    </button>
+                                    {getNextStatus(order.status) && (
+
+                                        <button
+                                            className={getNextStatus(order.status).className}
+                                            onClick={() =>
+                                                updateOrderStatus(
+                                                    order.id,
+                                                    getNextStatus(order.status).value
+                                                )
+                                            }
+                                        >   
+                                            {getNextStatus(order.status).label}
+                                        </button>
+
+                                    )}
 
                                     <button
                                         className="delete-btn"
@@ -336,10 +462,10 @@ function AdminOrders() {
                                     </button>
 
                                 </td>
-
                             </tr>
 
                         ))}
+
 
                     </tbody>
 
@@ -387,12 +513,16 @@ function AdminOrders() {
 
                                         <option value="PREPARING">Preparing</option>
 
-                                        <option value="OUT_FOR_DELIVERY">
-                                            Out For Delivery
+                                        <option value="CONFIRMED">
+                                            Confirmed
                                         </option>
 
-                                        <option value="DELIVERED">
-                                            Delivered
+                                        <option value="READY_FOR_PICKUP">
+                                            Ready For Pickup
+                                        </option>
+
+                                        <option value="COMPLETED">
+                                            Completed
                                         </option>
 
                                         <option value="CANCELLED">
@@ -462,7 +592,7 @@ function AdminOrders() {
                                 onClick={(e) => e.stopPropagation()}
                             >
 
-                                <div className="food-modal-header">
+                                <div className="order-modal-header">
 
                                     <h2>
 
@@ -523,15 +653,28 @@ function AdminOrders() {
 
                                     </p>
 
+                                    <h3>Pickup Information</h3>
+
                                     <p>
 
-                                        <strong>Delivery Address :</strong>
+                                        <strong>Pickup Time :</strong>
+
+                                        {formatTime(orderDetails.pickupTime)}
 
                                     </p>
 
                                     <p>
 
-                                        {orderDetails.deliveryAddress}
+                                        <strong>Estimated Ready :</strong>
+
+                                        {formatTime(orderDetails.estimatedReadyTime)}
+                                    </p>
+
+                                    <p>
+
+                                        <strong>Special Instructions :</strong>
+
+                                        {formatInstructions(orderDetails.specialInstructions)}
 
                                     </p>
 

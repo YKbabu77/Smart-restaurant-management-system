@@ -72,12 +72,36 @@ td{
 
 }
 .modal-overlay{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.5);
+
+    background:rgba(0,0,0,.55);
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
+    padding:20px;
+
+    z-index:9999;
+
+}
+.close-btn{
+
+    background:none;
+
+    border:none;
+
+    color:#fff;
+
+    font-size:24px;
+
+    cursor:pointer;
+
 }
 
 .modal{

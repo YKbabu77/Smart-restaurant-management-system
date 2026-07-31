@@ -1,3 +1,4 @@
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\config\CorsConfig.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\controller\AuthController.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\controller\CartController.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\controller\CategoryController.java
@@ -15,6 +16,7 @@ D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\r
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\OrderDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\OrderItemDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\OrderRequest.java
+D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\OrderStatusRequest.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\RegisterRequestDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\dto\UserDTO.java
 D:\projects\restaurant-website\restaurant-backend\src\main\java\com\restaurant\restaurant_backend\entity\Cart.java

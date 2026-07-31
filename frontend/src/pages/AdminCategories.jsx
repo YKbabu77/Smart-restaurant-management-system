@@ -190,7 +190,7 @@ function AdminCategories() {
 
                                 </td>
 
-                                <td>
+                                <td className="actions">
                                     <button
                                         className="edit-btn"
                                         onClick={() => {

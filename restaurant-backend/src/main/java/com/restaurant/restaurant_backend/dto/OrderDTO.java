@@ -2,6 +2,7 @@ package com.restaurant.restaurant_backend.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class OrderDTO {
 
@@ -18,7 +19,11 @@ public class OrderDTO {
     private String paymentMethod;
     private String paymentStatus;
 
-    private String deliveryAddress;
+    private LocalTime estimatedReadyTime;
+
+    private LocalTime pickupTime;
+
+    private String specialInstructions;
 
     public OrderDTO() {
     }
@@ -31,7 +36,9 @@ public class OrderDTO {
                     String status,
                     String paymentMethod,
                     String paymentStatus,
-                    String deliveryAddress) {
+                    LocalTime pickupTime,
+                    LocalTime estimatedReadyTime,
+                    String specialInstructions) {
 
         this.id = id;
         this.userId = userId;
@@ -41,7 +48,9 @@ public class OrderDTO {
         this.status = status;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
-        this.deliveryAddress = deliveryAddress;
+        this.pickupTime = pickupTime;
+        this.estimatedReadyTime = estimatedReadyTime;
+        this.specialInstructions = specialInstructions;
     }
 
     public Long getId() {
@@ -108,14 +117,30 @@ public class OrderDTO {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
     // Generate Getters & Setters
+
+    public String getSpecialInstructions() {
+        return specialInstructions;
+    }
+
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
+    }
+
+    public LocalTime getPickupTime() {
+        return pickupTime;
+    }
+
+    public void setPickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
+    }
+
+    public LocalTime getEstimatedReadyTime() {
+        return estimatedReadyTime;
+    }
+
+    public void setEstimatedReadyTime(LocalTime estimatedReadyTime) {
+        this.estimatedReadyTime = estimatedReadyTime;
+    }
     
 }

@@ -354,27 +354,27 @@ function AdminCustomers() {
 
                                     </td>
 
-                                    <td>
+                                    <td className="customer-actions">
 
                                         <button
-                                            className="view-btn"
+                                            className="customer-view-btn"
                                             onClick={() => viewCustomerDetails(customer.id)}
                                         >
-                                            View
+                                            👁 View
                                         </button>
 
                                         <button
-                                            className="edit-btn"
+                                            className="customer-edit-btn"
                                             onClick={() => openEditModal(customer)}
                                         >
-                                            Edit
+                                            ✏ Edit
                                         </button>
 
                                         <button
-                                            className="delete-btn"
+                                            className="customer-delete-btn"
                                             onClick={() => deleteCustomer(customer.id)}
                                         >
-                                            Delete
+                                           🗑 Delete
                                         </button>
 
                                     </td>

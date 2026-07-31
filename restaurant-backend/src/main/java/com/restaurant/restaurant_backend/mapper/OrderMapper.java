@@ -25,62 +25,46 @@ public class OrderMapper {
                 order.getStatus().name(),
                 order.getPaymentMethod().name(),
                 order.getPaymentStatus().name(),
-                order.getDeliveryAddress()
+                order.getPickupTime(),
+                order.getEstimatedReadyTime(),
+                order.getSpecialInstructions()
         );
     }
+
     public static OrderItemDTO toItemDTO(OrderItem item) {
 
-    return new OrderItemDTO(
-
-            item.getId(),
-
-            item.getFood().getId(),
-
-            item.getFood().getName(),
-
-            item.getFood().getImageUrl(),
-
-            item.getQuantity(),
-
-            item.getPrice()
-
-    );
+        return new OrderItemDTO(
+                item.getId(),
+                item.getFood().getId(),
+                item.getFood().getName(),
+                item.getFood().getImageUrl(),
+                item.getQuantity(),
+                item.getPrice()
+        );
     }
+
     public static OrderDetailsDTO toDetailsDTO(Order order) {
 
-    List<OrderItemDTO> items =
+        List<OrderItemDTO> items
+                = order.getOrderItems()
+                        .stream()
+                        .map(OrderMapper::toItemDTO)
+                        .toList();
 
-            order.getOrderItems()
-
-                    .stream()
-
-                    .map(OrderMapper::toItemDTO)
-
-                    .toList();
-
-    return new OrderDetailsDTO(
-
-            order.getId(),
-
-            order.getUser().getId(),
-
-            order.getUser().getFullName(),
-
-            order.getOrderDate(),
-
-            order.getTotalAmount(),
-
-            order.getStatus().name(),
-
-            order.getPaymentMethod().name(),
-
-            order.getPaymentStatus().name(),
-
-            order.getDeliveryAddress(),
-
-            items
-
-    );
+        return new OrderDetailsDTO(
+                order.getId(),
+                order.getUser().getId(),
+                order.getUser().getFullName(),
+                order.getOrderDate(),
+                order.getTotalAmount(),
+                order.getStatus().name(),
+                order.getPaymentMethod().name(),
+                order.getPaymentStatus().name(),
+                order.getPickupTime(),
+                order.getEstimatedReadyTime(),
+                order.getSpecialInstructions(),
+                items
+        );
 
     }
 }

@@ -20,6 +20,8 @@ import AdminFoods from "./pages/AdminFoods";
 import AdminCategories from "./pages/AdminCategories";
 import AdminOrders from "./pages/AdminOrders";
 import AdminCustomers from "./pages/AdminCustomers";
+import SchedulePickup from "./pages/SchedulePickup";
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
   return (
@@ -39,6 +41,14 @@ function App() {
           }
         />
         <Route
+          path="/schedule-pickup"
+          element={
+            <ProtectedRoute>
+              <SchedulePickup />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/orders"
           element={
             <ProtectedRoute>
@@ -48,41 +58,41 @@ function App() {
         <Route
           path="/admin"
           element={
-            <ProtectedRoute>
+            <AdminRoute>
               <AdminDashboard />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/foods"
           element={
-            <ProtectedRoute>
+            <AdminRoute>
               <AdminFoods />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/categories"
           element={
-            <ProtectedRoute>
+            <AdminRoute>
               <AdminCategories />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/orders"
           element={
-            <ProtectedRoute>
-              <AdminOrders />
-            </ProtectedRoute>
+            <AdminRoute>
+              <AdminOrders/>
+            </AdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin/customers"
           element={
-            <ProtectedRoute>
+            <AdminRoute>
               <AdminCustomers />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route path="/login" element={<Login />} />

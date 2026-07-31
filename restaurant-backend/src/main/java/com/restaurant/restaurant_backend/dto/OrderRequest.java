@@ -1,11 +1,16 @@
 package com.restaurant.restaurant_backend.dto;
 
+import java.time.LocalTime;
+
 import com.restaurant.restaurant_backend.entity.PaymentMethod;
 
 public class OrderRequest {
 
     private Long userId;
-    private String deliveryAddress;
+    private LocalTime pickupTime;
+
+    private String specialInstructions;
+
     private PaymentMethod paymentMethod;
 
     public OrderRequest() {
@@ -19,13 +24,6 @@ public class OrderRequest {
         this.userId = userId;
     }
 
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
@@ -33,5 +31,21 @@ public class OrderRequest {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public String getSpecialInstructions() {
+        return specialInstructions;
+    }
+
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
+    }
+
+    public LocalTime getPickupTime() {
+        return pickupTime;
+    }
+
+    public void setPickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
     }
 }
