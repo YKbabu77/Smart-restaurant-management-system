@@ -13,7 +13,6 @@ function Register() {
     email: "",
     phone: "",
     dob: "",
-    address: "",
     password: "",
     confirmPassword: ""
     });
@@ -54,7 +53,6 @@ function Register() {
             email: "",
             phone: "",
             dob: "",
-            address: "",
             password: "",
             confirmPassword: ""
         });
@@ -138,14 +136,6 @@ function Register() {
                         <input
                             type="date"
                         />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Address</label>
-                        <textarea
-                            rows="3"
-                            placeholder="Enter your address"
-                        ></textarea>
                     </div>
 
                     <div className="form-group">

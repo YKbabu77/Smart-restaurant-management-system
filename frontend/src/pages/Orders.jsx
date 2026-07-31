@@ -284,16 +284,16 @@ function Orders() {
                                         </h4>
 
                                         <p>
-                                            Quantity : {item.quantity}
+                                            Quantity : {item.quantity}X{item.price}
                                         </p>
 
                                     </div>
 
                                     <div className="food-price">
 
-                                        <h4>
+                                        {/* <h4>
                                             ₹{item.price}
-                                        </h4>
+                                        </h4> */}
 
                                         <p>
                                             ₹{item.price * item.quantity}

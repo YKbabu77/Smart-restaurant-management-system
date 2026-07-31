@@ -29,7 +29,6 @@ public class UserDTO {
     private String phone;
     private String role;
     private Date dateOfBirth;
-    private String address;
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -43,7 +42,6 @@ public class UserDTO {
                    String phone,
                    String role,
                    Date dateOfBirth,
-                   String address,
                    Boolean isActive,
                    LocalDateTime createdAt,
                    LocalDateTime updatedAt) {
@@ -54,7 +52,6 @@ public class UserDTO {
         this.phone = phone;
         this.role = role;
         this.dateOfBirth = dateOfBirth;
-        this.address = address;
         this.isActive = isActive;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -106,14 +103,6 @@ public class UserDTO {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Boolean getIsActive() {

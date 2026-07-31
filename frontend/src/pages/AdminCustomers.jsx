@@ -21,8 +21,7 @@ function AdminCustomers() {
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
-        phone: "",
-        address: ""
+        phone: ""
     });
 
     useEffect(() => {
@@ -132,9 +131,7 @@ function AdminCustomers() {
 
             email: customer.email,
 
-            phone: customer.phone,
-
-            address: customer.address
+            phone: customer.phone
 
         });
 
@@ -473,23 +470,6 @@ function AdminCustomers() {
 
                                     </label>
 
-                                    <label>
-
-                                        Address
-
-                                        <textarea
-                                            rows="3"
-                                            value={formData.address}
-                                            onChange={(e) =>
-                                                setFormData({
-                                                    ...formData,
-                                                    address: e.target.value
-                                                })
-                                            }
-                                        />
-
-                                    </label>
-
                                     <div className="form-actions">
 
                                         <button
@@ -564,8 +544,6 @@ function AdminCustomers() {
                                     <p><strong>Status:</strong> {viewCustomer.isActive ? "Active" : "Inactive"}</p>
 
                                     <p><strong>Date of Birth:</strong> {viewCustomer.dateOfBirth || "N/A"}</p>
-
-                                    <p><strong>Address:</strong> {viewCustomer.address || "N/A"}</p>
 
                                     <p>
                                         <strong>Created:</strong>{" "}

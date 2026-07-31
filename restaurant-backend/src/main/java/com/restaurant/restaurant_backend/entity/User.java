@@ -24,7 +24,6 @@ import jakarta.persistence.Table;
     "password",
     "role",
     "dateOfBirth",
-    "address",
     "isActive",
     "createdAt",
     "updatedAt"
@@ -60,8 +59,6 @@ public class User {
 
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
-
-    private String address;
 
     @Column(name = "is_active")
     private Boolean isActive = true;
@@ -129,14 +126,6 @@ public class User {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Boolean getIsActive() {
