@@ -20,7 +20,8 @@ import com.restaurant.restaurant_backend.service.FoodService;
 
 @RestController
 @RequestMapping("/api/foods")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173",
+                "https://restaurant-management-system-xi-five.vercel.app"})
 public class FoodController {
 
     @Autowired

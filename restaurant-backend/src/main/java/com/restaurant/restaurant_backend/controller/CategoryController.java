@@ -20,7 +20,8 @@ import com.restaurant.restaurant_backend.service.CategoryService;
 
 @RestController
 @RequestMapping("/api/categories")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173",
+                "https://restaurant-management-system-xi-five.vercel.app"})
 public class CategoryController {
 
     @Autowired

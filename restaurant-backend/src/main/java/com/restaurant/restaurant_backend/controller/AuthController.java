@@ -18,7 +18,8 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173",
+        "https://restaurant-management-system-xi-five.vercel.app"})
 public class AuthController {
 
     private final AuthService authService;
