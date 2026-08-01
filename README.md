@@ -1,6 +1,7 @@
 # 🍽️ Smart Restaurant Pre-Order & Pickup Management System
 
 A full-stack restaurant management web application that allows customers to browse the menu, place pickup orders, and track their orders, while providing administrators with a dashboard to manage foods, categories, customers, and orders.
+🌐 **Live Website:** https://restaurant-management-system-xi-five.vercel.app
 
 ---
 
