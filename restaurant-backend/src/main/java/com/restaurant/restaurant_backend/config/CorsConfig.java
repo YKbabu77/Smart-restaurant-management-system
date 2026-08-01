@@ -21,9 +21,9 @@ public class CorsConfig {
                                 "http://localhost:5173",
                                 "https://restaurant-management-system-xi-five.vercel.app"
                         )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
+                        // .allowCredentials(true);
 
             }
 
