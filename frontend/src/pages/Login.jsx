@@ -5,12 +5,15 @@ import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import axios from "axios";
 import api from "../services/api";
+// import { Link, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
     const navigate = useNavigate();
-
+    const { login } = useAuth();
     const [loginData, setLoginData] = useState({
-    email: "",
+    identifier: "",
     password: ""
     });
 
@@ -25,7 +28,7 @@ function Login() {
 
     setLoginData({
 
-        email: "demo@foodparadise.com",
+        identifier: "demo@foodparadise.com",
 
         password: "Demo@123"
 
@@ -36,86 +39,82 @@ function Login() {
     };
     const handleDemoLogin = async () => {
 
-    try {
+        try {
 
-        const demoCredentials = {
+            const demoCredentials = {
+                identifier: "demo@foodparadise.com",
+                password: "Demo@123"
+            };
 
-            email: "demo@foodparadise.com",
+            const response = await api.post(
+                "/api/auth/login",
+                demoCredentials
+            );
 
-            password: "Demo@123"
+            const { token, user } = response.data;
 
-        };
+            login(token, user);
 
-        const response = await api.post("/api/auth/login", demoCredentials);
+            if (user.role === "ADMIN") {
+                navigate("/admin");
+            } else {
+                navigate("/");
+            }
 
-        localStorage.setItem(
+        } catch (error) {
 
-            "user",
+            console.error(error);
 
-            JSON.stringify(response.data)
+            setMessage("Demo login failed.");
 
-        );
-
-        if (response.data.role === "ADMIN") {
-            navigate("/admin");
-        } else {
-            navigate("/");
         }
-
-    } catch (error) {
-
-        console.error(error);
-
-        setMessage("Demo login failed.");
-
-    }
-
     };
     const handleSubmit = async (e) => {
+
     e.preventDefault();
 
-    try {
+        try {
 
-        const response = await api.post("/api/auth/login", loginData);
+            const response = await api.post(
+                "/api/auth/login",
+                loginData
+            );
 
-        // Save logged-in user
-        localStorage.setItem(
-            "user",
-            JSON.stringify(response.data)
-        );
+            const { token, user } = response.data;
 
-        setMessage("Login Successful!");
+            // Save authentication state
+            login(token, user);
 
-        setTimeout(() => {
+            setMessage("Login Successful!");
 
-        if (response.data.role === "ADMIN") {
-            navigate("/admin");
-        } else {
-            navigate("/");
+            setTimeout(() => {
+
+                if (user.role === "ADMIN") {
+                    navigate("/admin");
+                } else {
+                    navigate("/");
+                }
+
+            }, 1000);
+
+        } catch (error) {
+
+            console.log(error);
+
+            if (error.response) {
+
+                if (error.response.data?.error) {
+                    setMessage(error.response.data.error);
+                } else {
+                    setMessage("Login Failed");
+                }
+
+            } else {
+
+                setMessage("Server is not responding.");
+
+            }
         }
-
-        }, 1000);
-
-    } catch (error) {
-
-    console.log(error);
-    console.log(error.response);
-    console.log(error.message);
-
-    if (error.response) {
-
-        if (error.response.data.error) {
-            setMessage(error.response.data.error);
-        } else {
-            setMessage("Login Failed");
-        }
-
-    } else {
-
-        setMessage(error.message);
-
-    }
-    }
     };
     return (
 
@@ -138,14 +137,14 @@ function Login() {
 
                     <div className="form-group">
 
-                        <label>Email</label>
+                        <label>Phone Number or Email</label>
 
                         <input
-                            type="email"
-                            name="email"
-                            value={loginData.email}
+                            type="text"
+                            name="identifier"
+                            value={loginData.identifier}
                             onChange={handleChange}
-                            placeholder="Enter your email"
+                            placeholder="Enter your phone number or email"
                         />
 
                     </div>
@@ -174,7 +173,7 @@ function Login() {
 
                         </label>
 
-                        <a href="#">
+                        <a href="/forgot-password" className="forgot-password-link">
                             Forgot Password?
                         </a>
 

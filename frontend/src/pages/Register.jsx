@@ -11,79 +11,80 @@ function Register() {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    dob: "",
-    password: "",
-    confirmPassword: ""
+        fullName: "",
+        email: "",
+        phone: "",
+        dateOfBirth: "",
+        password: "",
+        confirmPassword: ""
     });
 
     const [message, setMessage] = useState("");
     const handleChange = (e) => {
-    setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-    });
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
     };
     const handleSubmit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    // Check password confirmation
-    if (formData.password !== formData.confirmPassword) {
-        setMessage("Passwords do not match.");
-        return;
-    }
-
-    try {
-
-        const response = await api.post("/api/auth/register", {
-            fullName: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            password: formData.password
-        });
-
-        setMessage("Registration Successful!");
-
-        // Clear form
-        setFormData({
-            fullName: "",
-            email: "",
-            phone: "",
-            dob: "",
-            password: "",
-            confirmPassword: ""
-        });
-
-        // Redirect to Login page after 2 seconds
-        setTimeout(() => {
-            navigate("/login");
-        }, 2000);
-
-    } catch (error) {
-
-        if (error.response) {
-
-            // Validation or duplicate email
-            if (error.response.data.error) {
-                setMessage(error.response.data.error);
-            } else {
-                setMessage("Registration Failed");
-            }
-
-        } else {
-            setMessage("Server is not responding.");
+        // Check password confirmation
+        if (formData.password !== formData.confirmPassword) {
+            setMessage("Passwords do not match.");
+            return;
         }
 
-    }
+        try {
+
+            const response = await api.post("/api/auth/register", {
+                fullName: formData.fullName,
+                email: formData.email,
+                phone: formData.phone,
+                dateOfBirth: formData.dateOfBirth || null,
+                password: formData.password
+            });
+
+            setMessage("Registration Successful!");
+
+            // Clear form
+            setFormData({
+                fullName: "",
+                email: "",
+                phone: "",
+                dateOfBirth: "",
+                password: "",
+                confirmPassword: ""
+            });
+
+            // Redirect to Login page after 2 seconds
+            setTimeout(() => {
+                navigate("/login");
+            }, 2000);
+
+        } catch (error) {
+
+            if (error.response) {
+
+                // Validation or duplicate email
+                if (error.response.data.error) {
+                    setMessage(error.response.data.error);
+                } else {
+                    setMessage("Registration Failed");
+                }
+
+            } else {
+                setMessage("Server is not responding.");
+            }
+
+        }
     };
     return (
 
         <div className="register-page">
-          <Helmet>
-    <title>Food Paradise | Register</title>
-</Helmet>
+            <Helmet>
+                <title>Food Paradise | Register</title>
+            </Helmet>
 
             <div className="register-container">
 
@@ -134,6 +135,9 @@ function Register() {
                         <label>Date of Birth</label>
                         <input
                             type="date"
+                            name="dateOfBirth"
+                            value={formData.dateOfBirth}
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -152,20 +156,20 @@ function Register() {
                         <label>Confirm Password</label>
                         <input
                             type="password"
-                             name="confirmPassword"
+                            name="confirmPassword"
                             value={formData.confirmPassword}
                             onChange={handleChange}
                             placeholder="Confirm your password"
                         />
                     </div>
                     {message && (
-                            <p
-                                style={{
+                        <p
+                            style={{
                                 color: message.includes("Successful") ? "green" : "red",
                                 marginBottom: "15px",
                                 fontWeight: "bold"
-                                }}
-                            >
+                            }}
+                        >
                             {message}
                         </p>
                     )}

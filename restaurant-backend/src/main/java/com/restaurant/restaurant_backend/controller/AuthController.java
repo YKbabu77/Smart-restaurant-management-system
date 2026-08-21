@@ -13,6 +13,7 @@ import com.restaurant.restaurant_backend.dto.RegisterRequestDTO;
 import com.restaurant.restaurant_backend.dto.UserDTO;
 import com.restaurant.restaurant_backend.entity.User;
 import com.restaurant.restaurant_backend.service.AuthService;
+import com.restaurant.restaurant_backend.dto.AuthResponseDTO;
 
 import jakarta.validation.Valid;
 
@@ -37,11 +38,11 @@ public class AuthController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(
+    public ResponseEntity<AuthResponseDTO> login(
         @Valid @RequestBody LoginRequestDTO request) {
 
-    UserDTO user = authService.login(request);
+    AuthResponseDTO authResponse = authService.login(request);
 
-    return ResponseEntity.ok(user);
+    return ResponseEntity.ok(authResponse);
     }
 }

@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequestDTO {
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Please enter a valid email")
-    private String email;
+    @NotBlank(message = "Email or phone number is required")
+    @Email(message = "Please enter a valid email or phone number")
+    private String identifier;
 
     @NotBlank(message = "Password is required")
     private String password;
@@ -15,12 +15,12 @@ public class LoginRequestDTO {
     public LoginRequestDTO() {
     }
 
-    public String getEmail() {
-        return email;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public String getPassword() {

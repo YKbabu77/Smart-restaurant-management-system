@@ -22,6 +22,8 @@ import AdminOrders from "./pages/AdminOrders";
 import AdminCustomers from "./pages/AdminCustomers";
 import SchedulePickup from "./pages/SchedulePickup";
 import AdminRoute from "./components/AdminRoute";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -83,7 +85,7 @@ function App() {
           path="/admin/orders"
           element={
             <AdminRoute>
-              <AdminOrders/>
+              <AdminOrders />
             </AdminRoute>
           }
         />
@@ -97,6 +99,14 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/forgot-password"
+          element={<ForgotPassword />}
+        />
+        <Route
+          path="/reset-password"
+          element={<ResetPassword />}
+        />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />

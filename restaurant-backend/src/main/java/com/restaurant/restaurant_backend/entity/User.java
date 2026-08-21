@@ -21,7 +21,6 @@ import jakarta.persistence.Table;
     "fullName",
     "email",
     "phone",
-    "password",
     "role",
     "dateOfBirth",
     "isActive",
@@ -44,12 +43,13 @@ public class User {
     @Column(name = "full_name", nullable = false, length = 100)
     private String fullName;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(unique = true, length = 100)
     private String email;
 
     @Column(nullable = false, unique = true, length = 15)
     private String phone;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
@@ -62,6 +62,12 @@ public class User {
 
     @Column(name = "is_active")
     private Boolean isActive = true;
+
+    @Column(name = "whatsapp_notifications")
+    private Boolean whatsappNotifications = true;
+
+    @Column(name = "email_notifications")
+    private Boolean emailNotifications = true;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -134,6 +140,24 @@ public class User {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public Boolean getWhatsappNotifications() {
+        return whatsappNotifications;
+    }
+
+    public void setWhatsappNotifications(Boolean whatsappNotifications) {
+        this.whatsappNotifications = whatsappNotifications;
+    }
+
+    
+
+    public Boolean getEmailNotifications() {
+        return emailNotifications;
+    }
+
+    public void setEmailNotifications(Boolean emailNotifications) {
+        this.emailNotifications = emailNotifications;
     }
 
     public LocalDateTime getCreatedAt() {
