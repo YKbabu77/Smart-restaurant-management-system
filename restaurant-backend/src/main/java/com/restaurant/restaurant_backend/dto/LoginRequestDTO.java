@@ -1,15 +1,24 @@
 package com.restaurant.restaurant_backend.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class LoginRequestDTO {
 
-    @NotBlank(message = "Email or phone number is required")
-    @Email(message = "Please enter a valid email or phone number")
+    @NotBlank(message = "Phone number or email is required")
+    @Pattern(
+        regexp = "^(?:[6-9]\\d{9}|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,})$",
+        message = "Please enter a valid email or phone number"
+    )
     private String identifier;
 
     @NotBlank(message = "Password is required")
+    @Size(
+        min = 6,
+        max = 20,
+        message = "Password must be between 6 and 20 characters"
+    )
     private String password;
 
     public LoginRequestDTO() {
