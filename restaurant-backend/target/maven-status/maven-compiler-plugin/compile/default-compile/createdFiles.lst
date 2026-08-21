@@ -8,7 +8,6 @@ com\restaurant\restaurant_backend\security\JwtAuthenticationFilter.class
 com\restaurant\restaurant_backend\controller\CategoryController.class
 com\restaurant\restaurant_backend\exception\ResourceNotFoundException.class
 com\restaurant\restaurant_backend\service\UserService.class
-com\restaurant\restaurant_backend\config\CorsConfig$1.class
 com\restaurant\restaurant_backend\RestaurantBackendApplication.class
 com\restaurant\restaurant_backend\repository\FoodRepository.class
 com\restaurant\restaurant_backend\repository\OrderRepository.class
